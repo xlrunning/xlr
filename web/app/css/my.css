@@ -1,0 +1,133 @@
+.page{
+    margin: 0px;
+    padding: 0px;
+}
+body{
+    background-color: #f3f4f5;
+}
+.header{
+    text-align: center;
+    background: linear-gradient(70deg, #66ccff, #36a2eb);
+    padding: 20px;
+}
+.header-avatar-img{
+    width: 50px;
+}
+.dealer-name,.mart-name{
+    color: #fff;
+    margin: 10px 0px;
+}
+.mart-name{
+    font-size: 14px;
+}
+.my-car{
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    background-color: #fff;
+    border-bottom: 1px #e1e1e1 solid;
+}
+.span-strong{
+    color: #f76046;
+}
+
+.my-car-inventory{
+    border-right: 1px #e1e1e1 solid;
+}
+.info{
+    margin-top: 10px;
+    background-color: #fff;
+}
+.credit{
+    padding: 0 10px;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    height: 50px;
+    line-height: 50px;
+    border-bottom: 1px #e1e1e1 solid;
+}
+.credit-title{
+    text-align: left;
+}
+.credit-num{
+    text-align: right;
+}
+.my-chart{
+    width: 300px;
+    margin: 0 auto;
+}
+footer{
+    width: 100%;
+    text-align: center;
+    padding-top: 10px;
+}
+.footer-span{
+    color: #d1d1d1;
+    font-size: 12px;
+    padding: 10px;
+}
+.my-apply-body{
+    margin-top: 10px;
+    background-color: #fff;
+
+}
+.my-apply-body ul li{
+    border-bottom: 1px #e1e1e1 solid;
+    line-height: 50px;
+    height: 50px;
+    position: relative;
+}
+.my-apply-body-span{
+    padding-left: 10px;
+}
+.my-apply-body-img{
+    background-size: 25px 25px;
+    background-repeat: no-repeat;
+    width: 25px;
+    height: 25px;
+    display: inline-block;
+    position: relative;
+    top: 5px;
+    left: 4px;
+    margin-left: 10px;
+}
+.my-apply-body-return-loan{
+    background-image: url("../img/my-loan.png");
+}
+.my-apply-body-car-loan{
+    background-image: url("../img/car-loan.png");
+}
+.my-apply-body-car-sync{
+    background-image: url("../img/sync-car.png");
+}
+.my-apply-body-car-wx{
+    background-image: url("../img/car-wx.png");
+}
+/*.my-apply-body-car-sync:hover{*/
+    /*-webkit-animation:spin 4s linear infinite;*/
+    /*-moz-animation:spin 4s linear infinite;*/
+    /*animation:spin 4s linear infinite;*/
+/*}*/
+/*@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }*/
+/*@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }*/
+/*@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }*/
+.my-apply-arrow-right{
+    background-image: url("../img/arrow-right.png");
+    background-size: 20px 20px;
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+}
+
+.color_warn{
+    color:#f76046;
+}

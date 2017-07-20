@@ -1,0 +1,13 @@
+
+update: 修改
+create: 添加
+remove: 删除
+
+Lexing\VehicleBundle\Entity\Vehicle: 车辆
+Lexing\DealerBundle\Entity\VehicleDealer: 车商
+Lexing\LoanBundle\Entity\VehicleMortgage: 车辆借款
+Lexing\UserBundle\Entity\User: 用户
+
+onsale_vehicle: 上架
+offsale_vehicle: 下架
+extend_credit: 授信

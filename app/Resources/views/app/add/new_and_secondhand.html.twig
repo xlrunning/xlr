@@ -1,0 +1,81 @@
+<li>
+    <div class="vehicle_info_left">
+        <span>库存状态</span>
+    </div>
+    <div class="vehicle_info_right">
+        <select name="nbOnSale" id="">
+            <option value="1" selected>在库</option>
+            <option value="0">下库</option>
+        </select>
+    </div>
+</li>
+<li>
+    <div class="vehicle_info_left">
+        <span>VIN</span>
+    </div>
+    <div class="vehicle_info_right">
+        <input type="text" name="vin" class="vehicle_info_detail_vin_i" placeholder="请输入VIN码" maxlength="17">
+    </div>
+</li>
+<li>
+    <div class="vehicle_info_left">
+        <span>品牌</span>
+    </div>
+    <div class="vehicle_info_right">
+        <select name="brand" id="vehicle_brand">
+            <option value="">品牌</option>
+            {% for brand in brandArr %}
+                <option value="{{ brand.id }}">{{ brand.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+</li>
+<li>
+    <div class="vehicle_info_left">
+        <span>车系</span>
+    </div>
+    <div class="vehicle_info_right">
+        <input type="hidden" name="" id="vehicle_series" value="{{ path('lx_api_vehicle_series') }}">
+        <select name="serie" id="vehicle_serie_select" >
+            <option value="">车系</option>
+        </select>
+    </div>
+</li>
+<li>
+    <div class="vehicle_info_left">
+        <span>车型</span>
+    </div>
+    <div class="vehicle_info_right">
+        <input type="hidden" name="model" id="vehicle_model" value="{{ path('lx_api_vehicle_models') }}">
+        <select name="model" id="vehicle_model_select" >
+            <option value="1">车型</option>
+        </select>
+    </div>
+</li>
+<li>
+    <div class="vehicle_info_left">
+        <span>表显里程</span>
+    </div>
+    <div class="vehicle_info_right">
+        <input type="number" name="mileage" class="vehicle_info_detail_vin_i" placeholder="表显里程(万公里)">
+    </div>
+</li>
+<li>
+    <div class="vehicle_info_left">
+        <span>初次上牌</span>
+    </div>
+    <div class="vehicle_info_right">
+        <div id="showDatePicker">初次上牌</div>
+        <input type="hidden" name="register_date" class="vehicle_info_detail_vin_i" id="showDatePickerVal" placeholder="初次上牌日期">
+    </div>
+</li>
+</li>
+<li>
+    <div class="vehicle_info_left">
+        <span>车身颜色</span>
+    </div>
+    <div class="vehicle_info_right">
+        <div id="vehicle_color">颜色</div>
+        <input type="hidden" name="color" id="vehicle_color_val" placeholder="颜色">
+    </div>
+</li>

@@ -1,0 +1,42 @@
+{% extends "app/appbase.html.twig" %}
+
+{% block title %}
+    向商户付款
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset("app/css/pay.css") }}">
+{% endblock %}
+
+{% block body %}
+    <div class="page">
+        <div class="pay_header">
+            <div class="pay_header_log">
+                <span class="pay_header_logo"></span>
+            </div>
+            <div class="pay_header_title">
+                <span>向</span> <span>乐行（深圳）信息科技有限公司</span> <span>付款</span>
+            </div>
+        </div>
+
+        <div class="pay_amount">
+            <div class="pay_amount_title">
+                <span>消费总额</span>
+            </div>
+            <div class="pay_amount_input_b">
+                <span class="pay_amount_tag">¥</span>
+                <input type="tel" id="amountShow" class="pay_amount_input" placeholder="0.00" autofocus>
+                <span class="pay_amount_clear display_none"></span>
+                <input type="hidden" name="" id="amount">
+                <div class="pay_amount_btn_b">
+                    <button class="pay_amount_btn btn_disable">付款</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset("app/js/pay.js") }}"></script>
+{% endblock %}

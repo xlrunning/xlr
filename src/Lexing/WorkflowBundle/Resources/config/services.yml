@@ -1,0 +1,30 @@
+services:
+#    lexing_workflow.example:
+#        class: Lexing\WorkflowBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]
+    lx_workflow.workflow_registry:
+        class: Lexing\WorkflowBundle\WorkflowRegistry
+
+    lx_workflow.workflow_manager:
+        class: Lexing\WorkflowBundle\Service\WorkflowManager
+        calls:
+            - [setContainer, ["@service_container"]]
+        tags:
+            - { name: kernel.event_subscriber }
+
+    lx_workflow.task_builder:
+        class: Lexing\WorkflowBundle\Builder\TaskBuilder
+#        calls:
+#            - [setContainer, ["@service_container"]]
+
+    lx_workflow.task_form_builder:
+        class: Lexing\WorkflowBundle\Builder\TaskFormBuilder
+        calls:
+            - [setContainer, ["@service_container"]]
+
+    lx_workflow.task_form_subscriber:
+        class: Lexing\WorkflowBundle\EventListener\TaskFormSubscriber
+#        calls:
+#            - [setContainer, ["@service_container"]]
+        tags:
+            - { name: kernel.event_subscriber }

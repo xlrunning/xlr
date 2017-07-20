@@ -1,0 +1,24 @@
+services:
+    nnv_gallery.admin.gallery:
+        class: Nnv\GalleryBundle\Admin\GalleryAdmin
+        arguments: [~, Nnv\GalleryBundle\Entity\Gallery, SonataAdminBundle:CRUD]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: 其他, label: 图片集 }
+            
+    nnv_gallery.helper:
+        class: Nnv\GalleryBundle\Service\GalleryHelper
+        
+    nnv_gallery.jms_serializer.handler:
+        class: Nnv\GalleryBundle\Serializer\Handler\GallerySerializerHandler
+        arguments:
+            - "@assets.packages"
+            - "@request_stack"
+        tags:
+            - { name: jms_serializer.handler, type: NnvGallery, format: json, direction: serialization, method: onPreSerialize }
+
+    nnv_gallery.twig_extension:
+        class: Nnv\GalleryBundle\Twig\GalleryTwigExtension
+        arguments:
+            - "@service_container"
+        tags:
+            - { name: twig.extension }

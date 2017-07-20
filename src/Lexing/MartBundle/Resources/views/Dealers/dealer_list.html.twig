@@ -1,0 +1,56 @@
+{% extends 'mart_admin/base.html.twig' %}
+{% block stylesheets %}
+    <style>
+        table.dataTable thead .sorting:after{
+            margin-left: 10px;
+        }
+        table.dataTable thead .sorting_asc:after {
+            margin-left: 10px;
+        }
+        table.dataTable thead .sorting_desc:after {
+            margin-left: 10px;
+        }
+    </style>
+{% endblock %}
+{% block content %}
+    <!-- Begin Panel -->
+    <div class="panel panel-plain panel-rounded">
+        <div class="panel-heading">
+            <h3 class="panel-title">车商列表</h3>
+            <!-- Begin Panel Toolbar -->
+            <div class="panel-toolbar">
+                <ul class="list-inline m-a-0">
+                    <li><i class="rs-collapse-panel icon-toolbar-rotate icon-toolbar gcon gcon-chevron-up"></i></li>
+                    <li><i class="rs-close-panel icon-toolbar gcon gcon-cross"></i></li>
+                </ul>
+            </div><!-- /.panel-toolbar -->
+            <!-- End Panel Toolbar -->
+        </div><!-- /.panel-heading -->
+        <div class="panel-body">
+            <table class="table table-b-t table-b-b datatable-default rs-table table-default">
+                <thead>
+                <tr>
+                    <th>id</th>
+                    <th>车城名称</th>
+                    <th>车城所在地</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for data in datas %}
+                    <tr>
+                        <td>{{ data.id }}</td>
+                        <td>{{ data.name }}</td>
+                        <td>{{ data.addr }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div><!-- .panel-body -->
+    </div><!-- /.panel -->
+    <!-- End Panel -->
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('/themes/roosa/plugins/datatable/datatables.min.js') }}"></script>
+    <script src="{{ asset('/themes/roosa/plugins/datatable/datatables-example.js') }}"></script>
+{% endblock %}

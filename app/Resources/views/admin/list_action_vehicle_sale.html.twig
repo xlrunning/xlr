@@ -1,0 +1,3 @@
+<a role="button" onclick="LxAdmin.changeSaleStatus(this, '{{ path("admin_lexing_vehicle_vehicle_sale", {id:object.id}) }}')" class="btn btn-sm btn-default" title="下架">
+    {% if object.onSale %}下架{% else %}上架{% endif %}
+</a>

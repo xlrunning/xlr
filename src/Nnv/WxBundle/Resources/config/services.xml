@@ -1,0 +1,42 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="nnv_wx.helper" class="Nnv\WxBundle\Service\WxHelper">
+            <call method="setContainer">
+                 <argument type="service" id="service_container" />
+            </call>
+        </service>
+        
+        <service id="nnv_wx.jssdk" class="Nnv\WxBundle\Service\WxJSSDK">
+            <argument type="service" id="service_container" />
+        </service>
+        
+        <service id="nnv_wx.pay" class="Nnv\WxBundle\Service\WxPay">
+            <argument type="service" id="service_container" />
+        </service>        
+        
+        <service id="nnv_wx.listener" class="Nnv\WxBundle\Listener\WxListener">
+            <argument type="service" id="service_container" />
+            <tag name="kernel.event_listener" event="tplmsgs.send" method="onTplMsgsSend" />
+            <tag name="kernel.event_listener" event="wxkefu.msg" method="onKefuMsgSend" />
+        </service>
+        
+        <service id="wxid_user_provider" class="Nnv\WxBundle\Security\WxidUserProvider">
+            <argument type="service" id="doctrine.orm.entity_manager" />
+            <argument type="service" id="service_container" />
+        </service>
+        
+        <service id="wxid_authenticator" class="Nnv\WxBundle\Security\WxidAuthenticator">
+            <argument type="service" id="wxid_user_provider" />
+        </service>
+        
+        <service id="nnv_wx.twig_extension" class="Nnv\WxBundle\Twig\WxTwigExtension">
+            <argument type="service" id="service_container" />
+            <tag name="twig.extension" />
+        </service>
+    </services>
+</container>

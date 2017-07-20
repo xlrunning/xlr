@@ -1,0 +1,38 @@
+services:
+#    lexing_vehicle.example:
+#        class: Lexing\VehicleBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]
+    lexing_vehicle.admin.vehicle:
+        class: Lexing\VehicleBundle\Admin\VehicleAdmin
+        arguments: [~, Lexing\VehicleBundle\Entity\Vehicle, LexingVehicleBundle:VehicleAdmin]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: 车辆, label: 车辆上下架 }
+        calls:
+            - [ setTemplate, [edit, admin/vehicle_edit.html.twig]]
+
+    lexing_vehicle.choice_populator:
+        class: Lexing\VehicleBundle\Service\ChoicePopulator
+        calls:
+            - [setContainer, ["@service_container"]]
+        tags:
+            - { name: nnv.form.choice_populator, from: brand, to: serie }
+            - { name: nnv.form.choice_populator, from: serie, to: model }
+
+    lexing_vehicle.model_form:
+        class: Lexing\VehicleBundle\Form\Type\VehicleModelFormType
+        calls:
+            - [setContainer, ["@service_container"]]
+        tags:
+            - { name: form.type, alias: vehicle_model }
+
+    lexing_vehicle.color_form:
+        class: Lexing\VehicleBundle\Form\Type\VehicleColorFormType
+        calls:
+            - [setContainer, ["@service_container"]]
+        tags:
+            - { name: form.type, alias: vehicle_color }
+
+    lexing_vehicle.get_vehicle_info:
+        class: Lexing\VehicleBundle\Service\GetVehicleInfo
+        calls:
+            - [setContainer,["@service_container"]]

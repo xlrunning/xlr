@@ -1,0 +1,83 @@
+<nav class="navbar navbar-default rs-navbar navbar-static-top">
+    <div class="container-fluid">
+
+        <div class="navbar-header">
+
+            <!-- Begin Logo Brand
+            Available class : .rs-logo.fixed-width
+            -->
+            <div class="rs-logo has-right-divider">
+                <!-- Main Image logo -->
+                <a class="navbar-brand rs-brand-text" href="#">
+                    {{ site.name }}
+                </a>
+                <!-- Initial text / icon logo -->
+                <!-- <a class="navbar-brand rs-brand-text brand-initial" href="#">
+                <i class="gcon gcon-twitter text-info"></i>
+                </a> -->
+            </div><!-- /.rs-logo -->
+            <!-- End Logo Brand -->
+
+            {#<!-- Begin button to toggle sidebar -->#}
+            {#<button type="button" class="navbar-toggle collapsed sidebar-toggle" id="rs-sidebar-toggle-mobile">#}
+                {#<span class="icon-bar"></span>#}
+                {#<span class="icon-bar"></span>#}
+                {#<span class="icon-bar"></span>#}
+            {#</button>#}
+            {#<!-- End button to toggle sidebar -->#}
+
+            <!-- Begin button to toggle navbar element -->
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#roosa-nav-collapse" aria-expanded="false">
+                <span class="gcon gcon-dots-three-vertical f-s-sm"></span>
+            </button>
+            <!-- End button to toggle navbar element -->
+
+        </div><!-- /.navbar-header -->
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="roosa-nav-collapse">
+
+            <!-- All left content goes here -->
+            <div class="navbar-left">
+                <p class="navbar-text text-muted">{{ _mart|default("车城") }}</p>
+            </div><!-- /.navbar-left -->
+            <!-- End navbar left content -->
+
+            <!-- All right content goes here -->
+            <div class="navbar-right">
+
+                <ul class="nav navbar-nav">
+                    <li class="navbar-icon">
+                        <a href="javascript:void(0);">
+                            <i class="gcon gcon-old-phone"></i>
+                            <span class="visible-xs-inline-block text-menu">400-800-8888</span>
+                        </a>
+                    </li>
+                    <li class="navbar-icon">
+                        <a href="#">
+                            <i class="gcon gcon-users"></i>
+                            <span class="visible-xs-inline-block text-menu">报名列表</span>
+                        </a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Dropodown <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="">Menu Item</a></li>
+                            <li><a href="">Menu Item</a></li>
+                            <li><a href="">Menu Item</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="{{ path('mart_logout') }}">
+                            登出
+                        </a>
+                    </li>
+                </ul>
+            </div><!-- /.navbar-right -->
+            <!-- End navbar right content -->
+
+        </div><!-- /.collapse navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>

@@ -1,0 +1,44 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    
+    <services>
+        <service id="nnv.form.type.image_file" class="Nnv\FormBundle\Form\Type\ImageFileType">
+            <tag name="form.type" alias="image_file" />
+        </service>
+        
+        <service id="nnv.form.type.doc_file" class="Nnv\FormBundle\Form\Type\DocFileType">
+            <tag name="form.type" alias="doc_file" />
+        </service>
+        
+        <service id="nnv.form.type.link" class="Nnv\FormBundle\Form\Type\LinkType">
+            <tag name="form.type" alias="link" />
+        </service>
+        
+        <service id="nnv.form.type.image_link" class="Nnv\FormBundle\Form\Type\ImageLinkType">
+            <tag name="form.type" alias="image_link" />
+        </service>
+        
+        <service id="nnv.form.type.choice_input" class="Nnv\FormBundle\Form\Type\ChoiceInputType">
+            <tag name="form.type" alias="choice_input" />
+        </service>
+        
+        <service id="nnv.form.type.express_input" class="Nnv\FormBundle\Form\Type\ExpressInputType">
+            <tag name="form.type" alias="express_input" />
+        </service>
+        
+        <service id="nnv.form.type.mobile" class="Nnv\FormBundle\Form\Type\MobileType">
+            <tag name="form.type" alias="mobile" />
+        </service>
+        
+        <service id="nnv.form.type.choice_or_text" class="Nnv\FormBundle\Form\Type\ChoiceOrTextType">
+            <tag name="form.type" alias="choice_or_text" />
+        </service>
+
+        <service id="nnv.form.choice_populator" class="Nnv\FormBundle\Service\ChoicePopulator">
+        </service>
+    </services>
+    
+</container>

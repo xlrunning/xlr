@@ -1,0 +1,10 @@
+{% extends 'NnvGalleryBundle:Gallery:manage.html.twig' %}
+
+{% block pageinfo %}
+    <h1>车辆详情 <small><a href="{{ path('admin_lexing_vehicle_vehicle_edit', {'id':vehicle.id, 'action':'contractSet'}) }}">返回编辑车辆信息</a></small></h1>
+    <div class='alert alert-warning'>
+        正在编辑车辆<strong><a target="_blank" href="{{ path('admin_lexing_vehicle_vehicle_show', {'id':vehicle.id}) }}">{{ vehicle }}</a></strong>的抵押合同照片
+    </div>
+    <div style="color:#999;">创建于 {{ gallery.createdAt|date }}</div>
+    {#<a href="#">返回编辑产品</a>#}
+{% endblock %}

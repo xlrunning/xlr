@@ -1,0 +1,80 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <style>
+        .vehicles_topay li a { display: inline-block; margin-right: 4px; font-size: 12px; }
+        .overlay {
+            position: fixed; top: 0; left: 0; display: none;
+            width: 100%; height: 100%; background: rgba(0,0,0,0.5);
+        }
+        .overlay .qrimg { display: block; margin: 80px auto; }
+        .trades { font-size: 12px; }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <h1>车辆列表</h1>
+    <div class="overlay">
+        <img class="qrimg" src="#" />
+    </div>
+    <div style="padding-left: 15px;">
+        <label><input type="radio" name="payment_method" value="wx" /> 微信</label>
+        <label><input type="radio" name="payment_method" value="alipay" /> 支付宝</label>
+        <label><input type="radio" name="payment_method" disabled="disabled" /> 银联（暂不可用）</label>
+    </div>
+    <div class="vehicles_topay">
+        <ul>
+        {% for vehicle in vehicles %}
+            <li>
+                {{ vehicle.model.brand }} - {{ vehicle.vin }}
+                <div class="trades">
+                    定金：{{ vehicle.frontPaidTrade }}<br/>
+                    首付：{{ vehicle.firstPaidTrade }}<br/>
+                    尾款：{{ vehicle.finalPaidTrade }}<br/>
+                </div>
+                <div class="pay_actions">
+                    <a class="btnpay" data-url="{{ path("lx_pay_vehicle", {id:vehicle.id, type:'front', amount:4}) }}" href="#">预付4K</a>
+                    <a class="btnpay" data-url="{{ path("lx_pay_vehicle", {id:vehicle.id, type:'first', amount:3}) }}" href="#">首付3W</a>
+                    <a class="btnpay" data-url="{{ path("lx_pay_vehicle", {id:vehicle.id, type:'full', amount:7}) }}" href="#">全款7W</a>
+                </div>
+            </li>
+        {% endfor %}
+        </ul>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+<script>
+    $(function(){
+        $('.btnpay').click(function(e){
+            var btn = $(this);
+            var method = $('input[name="payment_method"]:checked').val();
+            console.log(method);
+            if (!method) {
+                alert('请选择支付方式');
+                return false;
+            }
+            var data = {method:method};
+            $.ajax({
+                url: btn.attr('data-url'),
+                method: 'POST',
+                data: data,
+                success: function(rsp){
+                    if (rsp.ok) {
+                        $('.overlay .qrimg').attr('src', rsp.qr);
+                        $('.overlay').show();
+                    } else {
+                        alert(rsp.err);
+                    }
+
+//                    setInterval(function(){
+//
+//                    }, 1000);
+                }
+            });
+
+            return false;
+        });
+    });
+</script>
+{% endblock %}

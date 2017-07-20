@@ -1,0 +1,58 @@
+
+## NOT IMPORTED YET
+
+lexing_workflow:
+    workflows:
+        loan_request:
+            descripition: '贷款申请工作流'
+            # assignment_maker: 必须提供一个service用于为workflow指派参与者、执行者, supervisor
+            tasks:
+                asset_secure:
+                    notify: '请去（哪个车城哪辆车在详情里）收取证照'
+                    # view: 对应的action??route??
+                    # grouped_to: initial_secure
+                    description: '车城1号岗收取证照钥匙，确认车辆在停并拍照'
+                    entries:
+                        vehicle_photo:
+                            label: '车辆照片'
+                            type: img
+                            # if type form then must provide form service
+                    # completion_checker:
+                asset_secure_doubled:
+                    description: '风控1号岗负责截取证照钥匙锁入证照箱的视频；截取汽车停在位置且车城1号岗正在拍照的视频'
+                    # review: []
+                    # grouped_to: initial_secure
+                    entries:
+                        vehicle_photo2:
+                            label: '车辆照片'
+                            type: img
+                        step1_video1:
+                            label: '收取证照入柜视频'
+                            type: video
+                        step1_video2:
+                            label: '1号岗拍照视频'
+                            type: video
+                finance_review:
+                    description: '财务审核'
+                    # review: ['@xxxxx']
+                executive_confirm1:
+                    description: '韶城确认'
+                executive_confirm2:
+                    description: '老姚确认'
+                boss_review:
+                    description: '乐君复核'
+                cashier_pay:
+                    description: '出纳打款'
+                    # perform_service: 如果设置了service将会是自动处理
+
+        repay_request:
+            description: '还款申请'
+
+
+
+
+
+
+
+
+

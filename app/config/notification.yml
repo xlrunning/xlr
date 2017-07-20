@@ -1,0 +1,49 @@
+
+nnv_notification:
+    # provider can have extra setting
+    providers:
+        sms:
+            alidayu:
+                name: "阿里大与"
+                appkey: "23458457"
+                secret: bee0e2983907a27194ebf358ccb348d0
+        # weixin
+
+    notifiables:
+        # 授信申请
+        # 授信批准
+        # 复审通知
+        # 复审完成
+        # 贷款申请
+        # 贷款批准
+        # 还款申请
+        # 视频监控报警
+        # 文件柜状态报警
+        # 车辆上下架
+        noti.test:
+            # which provider
+            sms:
+                tpl_id: SMS_52185410
+                sign_name: 尼尼微科技
+
+        login.noti:
+            weixin:
+                # defer: true
+                tpl_id: 48QgrxmpKykl0h8YszziEniXpIOcnEcxiQ1-qCXHe10
+                data:
+                    first: 扫码登入微信机器人
+                    keyword1: nnvtech
+                    keyword2: WX助理
+                    keyword3: bot.vappn.com
+                    keyword4: "{{ 'now'|date('Y-m-d H:i:s') }}"
+                    remark:   "有效期5分钟,请尽快扫码登入"
+                
+        deposit.done:
+            weixin:
+                tpl_id: 4AeOyIkQ70E_ZgYJytX2_VmgKnWCh3jBA3zDSL_d5yM
+                # url or route?
+                data:
+                    first: 恭喜充值成功
+                    keyword1: "{{ trade.totalFee }}元"
+                    keyword2: "{{ trade.createdAt|date() }}"
+                    remark:   "你当前账户余额{{ user.balance }}，如有疑问，请咨询客服"

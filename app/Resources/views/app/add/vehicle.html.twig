@@ -1,0 +1,81 @@
+{% extends "app/appbase.html.twig" %}
+
+{% block title %}
+    车辆上架
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset("app/css/weui.min.css") }}">
+    <link rel="stylesheet" href="{{ asset("app/css/vehicle.css") }}">
+{% endblock %}
+
+{% block body %}
+    <div class="page">
+        {#<form action="">#}
+            <div class="vehicle_upload_img">
+                <label class="vehicle_upload_label" for="vehicle_upload_click">+</label>
+                <input type="file" name="files" id="vehicle_upload_click" style="display: none;" multiple>
+                <input type="hidden" name="" id="token" value="{{ token }}">
+                <div class="vehicle_upload_img_title">
+                    上传图片
+                    <div class="vehicle_img">
+                        <input type="hidden" class="vehicle_img_arr" value="" accept="image/*">
+                        {#<div class="vehicle_img_b">#}
+                            {#<div class="vehicle_img_b_delete none">x</div>#}
+                            {#<img src="" alt="" class="vehicle_img_b_w">#}
+                            {#<div class="upload_process">等待上传</div>#}
+                        {#</div>#}
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+
+            <div class="vehicle_info_b">
+                <div class="vehicle_info_title">
+                    基本信息
+                </div>
+                <div class="vehicle_info_detail">
+                    <ul>
+                        <li>
+                            <div class="vehicle_info_left">
+                                <span>车辆类型</span>
+                            </div>
+                            <div class="vehicle_info_right">
+                                <select name="kind" id="">
+                                    <option value="secondhand" selected>二手车</option>
+                                    <option value="new">新车</option>
+                                    <option value="imported">进口车</option>
+                                </select>
+                            </div>
+                        </li>
+                        <div class="hidden" id="block_imported">
+                            {% include 'app/add/imported.html.twig' %}
+                        </div>
+                        <div class="" id="block_new_and_secondhand">
+                            {% include 'app/add/new_and_secondhand.html.twig' %}
+                        </div>
+                    </ul>
+                </div>
+            </div>
+        <div class="add_vehicle_submit">
+            <input type="hidden" value="{{ path("lx_dealer_app_get_vehicle") }}" class="subUrl">
+            <button class="add_vehicle_submit_btn">新增车辆</button>
+        </div>
+        {#</form>#}
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <style>
+        .hidden{
+            display: none;
+        }
+    </style>
+
+    <script src="{{ asset("app/js/vue.js") }}"></script>
+    <script src="{{ asset("app/js/weui.min.js") }}"></script>
+    <script src="{{ asset("app/js/vehicle.js") }}?v=7"></script>
+    <script src="{{ asset("app/js/vehicle.imported.js") }}?v=7"></script>
+    <script type="text/javascript">
+    </script>
+{% endblock %}

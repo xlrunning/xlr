@@ -1,0 +1,54 @@
+gender:
+    1: 男
+    0: 女
+    
+pronoun:
+    1: 他
+    0: 她
+    
+rule:
+    0: 首字母严格匹配
+    1: 关键字
+
+zodiac:
+    1: 摩羯座
+    2: 水瓶座
+    3: 双鱼座
+    4: 白羊座
+    5: 金牛座
+    6: 双子座
+    7: 巨蟹座
+    8: 狮子座
+    9: 处女座
+    10: 天秤座
+    11: 天蝎座
+    12: 射手座
+
+week:
+    0: 周日
+    1: 周一
+    2: 周二
+    3: 周三
+    4: 周四
+    5: 周五
+    6: 周六
+
+# security
+Bad credentials: 账号或密码有误
+The presented password is invalid.: 账号或密码有误
+The presented password cannot be empty.: 密码不能为空
+The credentials were changed from another session.: 会话失效
+User account is locked.: 帐号被封禁
+User account is disabled.: 帐号尚未激活
+
+# Time ago in words - Twig Extension
+less than %seconds seconds ago: 刚刚
+half a minute ago: 刚刚
+less than a minute ago: 刚刚
+1 minute ago: 一分钟前
+# %minutes minutes ago: "%minutes 分钟前"
+about 1 hour ago: 约一小时前
+about %hours hours ago: "约 %hours 小时前"
+1 day ago: 一天前
+# %days days ago: "%days 天前"
+Username could not be found.: 用户不存在

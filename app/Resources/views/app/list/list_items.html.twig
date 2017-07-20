@@ -1,0 +1,52 @@
+{% if vehicleArr is empty %}
+    <div class="noMore color-d2">
+        没有更多了
+    </div>
+{% else %}
+    {% for vehicle in vehicleArr %}
+        <a href="{{ path('app_vehicle_detail',{'id':vehicle.id}) }}" class="list-li-a">
+            <li>
+                <div class="list-item">
+                    <div class="list-item-info">
+                        <div class="product-img">
+                            {% if vehicle.cover is not empty %}
+                                <img data-src="{{ qn_url }}/image/list/{{ vehicle.cover }}" alt="车辆封面" src="{{ asset("app/img/lexing-cover.png") }}"
+                                     class="preview-img b-lazy">
+                            {% else %}
+                                <img alt="车辆封面" src="{{ asset("app/img/lexing-cover.png") }}"
+                                     class="preview-img ">
+                            {% endif %}
+                        </div>
+                        <div class="product-info">
+                            <div class="title-a">
+                                <h4>{{ vehicle.soucheModel }}</h4>
+                            </div>
+                            <div class="detail">
+                                <span>车龄：{{ vehicle.age }}年</span>
+                                <span>|</span>
+                                <span>{{ vehicle.mileage }}万公里</span>
+                            </div>
+                            <div class="price-block">
+                                <span class="price-title">网络标价</span>
+                                <span class="preference-price">{{ vehicle.info[0]['val'] }}万元</span>
+                            </div>
+                            <div class="tag">
+                                {% if not vehicle.frontPaidTrade is empty %}
+                                    <button class="tag-btn tag-active">订</button>
+                                {% endif %}
+                                {% if not vehicle.firstPaidTrade is empty %}
+                                    <button class="tag-btn tag-active">首</button>
+                                {% endif %}
+                                {#<button class="tag-btn tag-active">抵押</button>#}
+                                <button class="tag-btn" style="float: right;position: relative;margin-right: 0;">抵押</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </a>
+    {% endfor %}
+{% endif %}
+
+
+

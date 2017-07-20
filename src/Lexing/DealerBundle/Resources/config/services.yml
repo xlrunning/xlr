@@ -1,0 +1,21 @@
+services:
+#    lexing_dealer.example:
+#        class: Lexing\DealerBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]
+    lexing_dealer.admin.vehicle_dealer:
+        class: Lexing\DealerBundle\Admin\VehicleDealerAdmin
+        arguments: [~, Lexing\DealerBundle\Entity\VehicleDealer, LexingDealerBundle:VehicleDealerAdmin]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: 车商, label: 车商}
+        calls:
+            - [ setTemplate, [edit, admin/dealer_edit.html.twig]]
+
+    lexing_dealer.admin.dealer_account:
+        class: Lexing\DealerBundle\Admin\DealerAccountAdmin
+        arguments: [~, Lexing\DealerBundle\Entity\DealerAccount, SonataAdminBundle:CRUD]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: 车商, label: 银行账户 }
+
+    lexing_dealer.qiniu:
+        class: Lexing\DealerBundle\Service\Qiniu
+        arguments: ['%qn_Ak%','%qn_SK%','%qn_bucket%']

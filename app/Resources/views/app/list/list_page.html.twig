@@ -1,0 +1,59 @@
+{% extends 'app/appbase.html.twig' %}
+
+{% block title %}
+    {% if title is defined %}
+        {{ title }}
+    {% endif %}
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset("app/css/loaders.min.css") }}">
+    <link rel="stylesheet" href="{{ asset("app/css/main.css") }}?v=30">
+{% endblock %}
+
+{% block body %}
+    <div class="page">
+        <div class="content">
+
+            {% include 'app/list/list_search.html.twig' %}
+
+            {% include'app/list/list_filter.html.twig' %}
+
+            <div class="dealer_info">
+                <div class="dealer_info_padding">
+                    {% if dealer.name is defined %}
+                        <div class="dealer_info_left">
+                            {{ dealer.mart.name }}-{{ dealer.name }}
+                        </div>
+                        <div class="dealer_info_right">
+                            共 <span class="dealer_info_num">{{ nbOnSale }}</span> 辆
+                        </div>
+                    {% else %}
+                        <div class="dealer_info_left">
+                            乐行
+                        </div>
+                        <div class="dealer_info_right">
+                            共 <span class="dealer_info_num">{{ nbOnSale }}</span> 辆
+                        </div>
+                    {% endif %}
+
+
+                </div>
+            </div>
+
+            <div class="car-list" id="cat-list-vue">
+                <ul id="car-ul">
+                    {% include 'app/list/list_items.html.twig' %}
+                </ul>
+                {% if vehicleArr is not empty %}
+                    {% include 'app/list/list_load_more.html.twig' %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset("app/js/blazy.min.js") }}?v=2"></script>
+    <script src="{{ asset("app/js/list_page.js") }}?v=22"></script>
+{% endblock %}

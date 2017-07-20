@@ -1,0 +1,9 @@
+{% if object.dealer.getAvailableCredit() %}
+    <a role="button" href="{{ path('admin_lexing_loan_vehiclemortgage_create', {vehicle:object.id, action:'mortgage'}) }}" class="btn btn-sm btn-default" title="抵押借款">
+        借
+    </a>
+{% else %}
+    <a role="button" href="#" class="btn btn-sm btn-default" title="额度不足" disabled="true">
+        <i class="fa fa-ban" aria-hidden="true"></i>借
+    </a>
+{% endif %}

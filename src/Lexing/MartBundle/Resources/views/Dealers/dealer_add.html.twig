@@ -1,0 +1,24 @@
+{% extends 'mart_admin/base.html.twig' %}
+
+{% block content %}
+    <!-- Begin Panel -->
+    <div class="panel panel-plain panel-rounded">
+        <div class="panel-heading">
+            <h3 class="panel-title">车商添加</h3>
+            <!-- Begin Panel Toolbar -->
+            <div class="panel-toolbar">
+                <ul class="list-inline m-a-0">
+                    <li><i class="rs-collapse-panel icon-toolbar-rotate icon-toolbar gcon gcon-chevron-up"></i></li>
+                    <li><i class="rs-close-panel icon-toolbar gcon gcon-cross"></i></li>
+                </ul>
+            </div><!-- /.panel-toolbar -->
+            <!-- End Panel Toolbar -->
+        </div><!-- /.panel-heading -->
+        <div class="panel-body">
+            {{ form_start(form) }}
+            {{ form_widget(form) }}
+            {{ form_end(form) }}
+        </div><!-- .panel-body -->
+    </div><!-- /.panel -->
+    <!-- End Panel -->
+{% endblock %}

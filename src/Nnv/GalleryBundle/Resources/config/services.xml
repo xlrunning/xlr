@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="nnv.gallery.uploadto" type="string">%kernel.root_dir%/../web/uploads/</parameter>
+    </parameters>
+    
+    <services>
+        <service id="nnv.gallery.form.type.gallery" class="Nnv\GalleryBundle\Form\Type\GalleryType">
+            <tag name="form.type" alias="nnv_form_gallery" />
+        </service>
+        <service id="nnv.gallery.form.type.gallery_item" class="Nnv\GalleryBundle\Form\Type\GalleryItemType">
+            <tag name="form.type" alias="nnv_form_gallery_item" />
+            <argument>%nnv.gallery.uploadto%</argument>
+        </service>
+    </services>
+</container>

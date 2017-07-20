@@ -1,0 +1,132 @@
+
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ gallery.name }}{% endblock %}
+
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap.min.css') }}" />
+<link rel="stylesheet" href="{{ asset('fontawesome/css/font-awesome.css') }}">    
+<link rel="stylesheet" href="{{ asset('bootstrap3-editable/css/bootstrap-editable.css') }}">
+{% stylesheets
+    '@NnvGalleryBundle/Resources/public/lightbox2/css/lightbox.css'
+%}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+{% endstylesheets %}
+<style>
+    .nnv-gallery-form-wrapper {
+        position: relative;
+    }
+    .nnv-gallery-form-wrapper .progress-all {
+        position: absolute; top: -2px; left: 0px; z-index: 10;
+    }
+    .nnv-gallery-form-wrapper > form {
+        border: 1px solid #ccc; padding: 4px; min-height: 480px;
+    }
+    #nnv_form_gallery_items {
+        position: relative; min-height: 100px;
+        max-height: 600px; overflow-y: auto;
+    }
+    #nnv_form_gallery_items > .form-row label { display: none; }
+    .nnv-gallery-item {
+        position: relative;
+        padding: 19px;
+        border-radius: 4px;
+        background-color: #f5f5f5;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
+        box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
+        min-height: 40px;
+        margin-bottom: 20px;
+        overflow-x: hidden;
+    }
+    .nnv-gallery-item .editable { max-width: 100%; display: inline-block; }
+    .nnv-gallery-item.uploading { background-color: #fcf8e3; }
+    .nnv-gallery-item.uploaded { background-color: #dff0d8; }
+    .nnv-gallery-item svg {
+        position: absolute; bottom: 0px; left: 0px;
+    }
+    .nnv-gallery-item.uploaded .btn-single-upload {
+        display: none;
+    }
+    .nnv-gallery-item.uploaded svg { display: none; }
+    .nnv-gallery-item .thumb-wrapper { display: block; max-height: 200px; overflow: hidden; }
+    .nnv-gallery-item img { width: 100%; }
+    .nnv-gallery-item .btn-group { visibility: hidden; }
+    .nnv-gallery-item:hover .btn-group { visibility: visible; }
+    label.fileinput input { display: none; }
+    
+    .editable-galleryitem textarea.form-control { margin-top: 4px; height: 80px; width: 200px; }
+</style>
+{% endblock %}
+
+{% form_theme form 'NnvGalleryBundle::fields.html.twig' %}
+
+{% block body %}
+<div class="container">
+    <div style="margin: 40px 0 20px 0;">
+        {% block pageinfo %}
+            <h1>{{ gallery.name }}管理
+                <a class="btn btn-sm btn-default" href="{{ path('admin_nnv_gallery_gallery_edit', {'id':gallery.id}) }}"><i class="fa fa-pencil"></i></a>
+                <a class="btn btn-sm btn-default" href="{{ path('admin_nnv_gallery_gallery_list') }}"><i class="fa fa-home"></i></a>
+            </h1>
+            {% if gallery.about is not empty %}
+            <div class='alert alert-warning'>
+                {{ gallery.about|nl2br|raw  }}
+            </div>
+            {% endif %}
+        {% endblock %}
+    </div>
+    
+    <div class="row">
+        <div class="col-sm-10 nnv-gallery-form-wrapper" data-item-create-url='{{ path("nnv_gallery_item_create", {"gallery":gallery.id}) }}' data-seq-url='{{ path("nnv_gallery_seq", {"gallery":gallery.id}) }}'>
+            <div class="progress-all col-md-12"></div>
+            {{ form_start(form) }}
+                {{ form_widget(form.items) }}
+            {{ form_end(form) }}
+            <div style="font-style: italic; color: #777;">* 上面区域可滚动显示更多</div>
+        </div>
+        <div class="col-sm-2">
+            <div class="block panel">
+                已上传 <span class="nbuploaded">{{ gallery.nbItems }}</span>，待上传 <span class="nbtoupload">{{ 0 }}</span>
+            </div>
+            <div>
+                <label title="如果图片较多较大会加载使得运行很慢">
+                    <input type="checkbox" name="upload-preview" value="1" checked="checked" /> 是否显示上传图片
+                </label>
+            </div>
+            <label class="btn btn-success fileinput btn-block" href="#">
+                选择图片
+                <input type="file" name="file" />
+            </label>
+            <a class="btn-upload-all btn btn-primary btn-block" href="#">全部上传</a>
+            <a class="btn-sortbyname btn btn-default btn-block" href="#">按文件名排序</a>
+            <a class="btn-seq btn btn-default btn-block" href="#">更新顺序</a>
+            <a class="btn-cancel-upload btn btn-danger btn-block" href="#">取消上传</a>
+            <a class="btn-prune btn btn-danger btn-block" href="#">清除未上传</a>
+            <hr/>
+            <a class="btn-cleargallery btn btn-danger btn-block" data-url="{{ path('nnv_gallery_clear', {'id':gallery.id}) }}" href="#">清空图库</a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block javascripts %}
+<script src="http://libs.baidu.com/jquery/2.0.3/jquery.min.js"></script>
+<script>
+    var typesChoices = {{ gallery_helper.typeChoices|json_encode()|raw }};
+</script>
+<script src="{{ asset('js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('bootstrap3-editable/js/bootstrap-editable.min.js') }}"></script>
+{% javascripts
+    '@NnvGalleryBundle/Resources/public/js/jquery.fn.sortable.min.js'
+    '@NnvGalleryBundle/Resources/public/js/jquery.ui.widget.js'
+    '@NnvGalleryBundle/Resources/public/js/jquery.iframe-transport.js'
+    '@NnvGalleryBundle/Resources/public/js/jquery.fileupload.js'
+    '@NnvGalleryBundle/Resources/public/js/progressbar.min.js'
+    '@NnvGalleryBundle/Resources/public/lightbox2/js/lightbox.min.js'
+    '@NnvGalleryBundle/Resources/public/js/nnv.galleryitem.js'
+    '@NnvGalleryBundle/Resources/public/js/nnv.gallery.js'
+%}
+    <script src="{{ asset_url }}"></script>
+{% endjavascripts %}
+{% endblock %}

@@ -1,0 +1,51 @@
+<h2>
+    <span>{{ payWay }}</span>
+    <img src="{{ asset("app/img/arrow-right.png") }}" class="common_arrow_img" alt="">
+</h2>
+<div class="deposit-body">
+    <div class="car-info-b">
+        <div class="car-price color-d1 font-14">
+            车辆售价：<span class="vehicle-price-strong">{{ vehicle.info[0]['val'] }}万</span><span class="color-d1 font-14">(含过户费)</span>
+        </div>
+        <div class="car-price color-d1 font-14">
+            确认金额：<span class="vehicle-price-strong">${ orderPrice | formatMoney}</span><span class="color-d1 font-14"></span>
+        </div>
+        <div class="car-price-input font-14 color-d1">
+            <label for="vehicle-order-dj">订金：</label>
+            <input type="tel" id="vehicle-order-dj"
+                   class="vehicle-order"
+                   placeholder="请输入价格"
+                   v-model="orderPrice"
+            >
+            <span>元</span>
+        </div>
+    </div>
+    <div class="choose-pay">
+        <ul class="choose-pay-ul">
+            <li>
+                <div class="alipay" @click="payClick('alipay','{{ type }}')">
+                    <img src="{{ asset("app/img/alipay-q.png") }}" alt="" class="img-pay">
+                    支付宝
+                    <img src="{{ asset("app/img/arrow-right.png") }}" alt=""
+                         class="img-arrow-right">
+                </div>
+            </li>
+            <li>
+                <div class="wxpay" @click="payClick('wxpay','{{ type }}')">
+                    <img src="{{ asset("app/img/wxpay.png") }}" alt="" class="img-pay">
+                    微信支付
+                    <img src="{{ asset("app/img/arrow-right.png") }}" alt=""
+                         class="img-arrow-right">
+                </div>
+            </li>
+            <li>
+                <div class="unionpay" @click="payClick('unionpay','{{ type }}')">
+                    <img src="{{ asset("app/img/unionpay.png") }}" alt="" class="img-pay">
+                    银联支付
+                    <img src="{{ asset("app/img/arrow-right.png") }}" alt=""
+                         class="img-arrow-right">
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

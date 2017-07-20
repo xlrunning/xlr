@@ -1,0 +1,22 @@
+{% extends "::endbase.html.twig" %}
+
+{% block stylesheets %}
+    <style>
+        .box { width: 480px; margin: 80px auto; text-align: center; border: 1px solid #ddd; padding: 48px 10px;
+            background: rgba(240,240,240,0.5);
+            border-radius: 4px;
+        }
+        .box .fa { font-size: 64px; }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <div class="box" style="">
+        <img src="{{ asset('images/lx_logo.png') }}" />
+        <h1>即将上线，敬请期待</h1>
+    </div>
+{% endblock %}
+
+{% block share_setting %}
+    shareSetting.title = 'hi';
+{% endblock %}

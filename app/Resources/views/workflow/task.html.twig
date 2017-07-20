@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {#任务 <a href="#">返回 {{ task.workflow }}</a>#}
+    {{ task.identifier }}
+    <p>
+        表单
+        {{ form(form) }}
+    </p>
+
+    <p>LOGs</p>
+{% endblock %}

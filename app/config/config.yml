@@ -1,0 +1,269 @@
+imports:
+    - { resource: parameters.yml }
+    - { resource: security.yml }
+    - { resource: services.yml }
+    - { resource: notification.yml }
+    - { resource: vehicle_params.yml }
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+parameters:
+    locale: zh_CN
+    site_name: xlr
+    brand_icon_prefix: "http://7xtgar.com1.z0.glb.clouddn.com/lexing/brandlogos/b_"
+    swiftpass_mchid:   103530004129 #7551000001
+    swiftpass_mchkey:  41048c802fefc8a4c26f4250f39bdaab #9d101c97133837e13dde2d32a5054abb
+
+framework:
+    #esi:             ~
+    translator:      { fallbacks: ["%locale%"] }
+    secret:          "%secret%"
+    router:
+        resource: "%kernel.root_dir%/config/routing.yml"
+        strict_requirements: ~
+    form:            ~
+    csrf_protection: ~
+    validation:      { enable_annotations: true }
+    #serializer:      { enable_annotations: true }
+    templating:
+        engines: ['twig']
+    default_locale:  "%locale%"
+    trusted_hosts:   ~
+    trusted_proxies: ~
+    session:
+        # http://symfony.com/doc/current/reference/configuration/framework.html#handler-id
+        handler_id:  session.handler.native_file
+        save_path:   "%kernel.root_dir%/../var/sessions/%kernel.environment%"
+    fragments:       ~
+    http_method_override: true
+    assets: ~
+    php_errors:
+        log: true
+
+# Twig Configuration
+twig:
+    debug:            "%kernel.debug%"
+    strict_variables: "%kernel.debug%"
+    date:
+        format: Y-m-d H:i
+    form_themes:
+        # other form themes
+        # Default:
+        # - form_div_layout.html.twig
+        - bootstrap_3_layout.html.twig
+        # - bootstrap_3_horizontal_layout.html.twig
+        # - foundation_5_layout.html.twig
+        - '::fields.html.twig'
+    globals:
+        site:
+            name: %site_name%
+            url: "##"
+        qn_url: "http://oobyy8vt6.bkt.clouddn.com/"
+        tel: 588-88888
+        support_email: support@lexing@360.com
+        support_address: 广州市天河区乐天创意园
+
+# Doctrine Configuration
+doctrine:
+    dbal:
+        driver:   pdo_mysql
+        host:     "%database_host%"
+        port:     "%database_port%"
+        dbname:   "%database_name%"
+        user:     "%database_user%"
+        password: "%database_password%"
+        charset:  UTF8
+        # if using pdo_sqlite as your database driver:
+        #   1. add the path in parameters.yml
+        #     e.g. database_path: "%kernel.root_dir%/../var/data/data.sqlite"
+        #   2. Uncomment database_path in parameters.yml.dist
+        #   3. Uncomment next line:
+        #path:     "%database_path%"
+
+    orm:
+        auto_generate_proxy_classes: "%kernel.debug%"
+        naming_strategy: doctrine.orm.naming_strategy.underscore
+        auto_mapping: true
+
+# Swiftmailer Configuration
+swiftmailer:
+    transport: "%mailer_transport%"
+    host:      "%mailer_host%"
+    username:  "%mailer_user%"
+    password:  "%mailer_password%"
+    spool:     { type: memory }
+
+fos_user:
+    db_driver: orm
+    firewall_name: main
+    user_class: Lexing\UserBundle\Entity\User
+#    registration:
+#        form:
+#            type:   sofashion_user_registration
+#    profile:
+#        form:
+#            type:   sofashion_user_profile
+    from_email:
+        address:        noreply@lx360.com
+        sender_name:    "%site_name%"
+        
+sonata_block:
+    default_contexts: [cms]
+    blocks:
+        sonata.admin.block.admin_list:
+            contexts:   [admin]
+        
+        lexing.sonata.block.service.assist:
+        lexing.sonata.block.service.expire:
+        sonata.block.service.text:
+        sonata.block.service.action:
+        sonata.block.service.rss:
+
+sonata_admin:
+    title: "%site_name%"
+    persist_filters: true
+#    templates:
+#        knp_menu_template: SonataAdminBundle:Menu:sonata_menu.html.twig
+    security:
+        handler: sonata.admin.security.handler.role
+    options:
+        title_mode: single_text
+        use_stickyforms: false
+        use_select2: true
+
+    dashboard:
+        blocks:
+            # display a dashboard block
+            # Customize this part to add new block configuration
+            #- { position: right, type: sonata.block.service.text, settings: { content: ""} }
+            #- { position: right, type: lexing.sonata.block.service.assist }
+            #- { position: left, type: lexing.sonata.block.service.stats }
+            - { position: left, type: sonata.admin.block.admin_list }
+            - { position: center, type: lexing.sonata.block.service.assist }
+            - { position: right, type: lexing.sonata.block.service.expire }
+
+        groups:
+            lexing.admin.group.user:
+                label:           用户管理
+                icon:            '<i class="fa fa-user"></i>'
+                items:
+                    - lexing_user.admin.user
+                roles: [ ROLE_SUPER_ADMIN ]
+#            lexing.admin.group.mart:
+#                label:           车城管理
+#                icon:            '<i class="fa fa-folder"></i>'
+#                items:
+#                    - lexing_mart.admin.vehicle_mart
+#            lexing.admin.group.imported_car:
+#                label:           进口车管理
+#                icon:            '<i class="fa fa-folder"></i>'
+#                items:
+#                    - lexing_imported_car.admin.imported_vehicle
+#                    - lexing_imported_car.admin.imported_brand
+#                    - lexing_imported_car.admin.imported_series
+#                    - lexing_imported_car.admin.imported_model
+            lexing.admin.group.dealer:
+                on_top:          true
+                label:           车商管理
+                icon:            '<i class="fa fa-folder"></i>'
+                items:
+                    - lexing_dealer.admin.vehicle_dealer
+#                    - lexing_device.admin.device
+#                    - lexing_dealer.admin.dealer_account
+                roles: [ ROLE_SUPER_ADMIN ]
+            lexing.admin.group.vehicle:
+                on_top:          true
+                label:           车辆上下架
+                icon:            '<i class="fa fa-car"></i>'
+                items:
+                    - lexing_vehicle.admin.vehicle
+                roles: [ ROLE_OPERATOR, ROLE_SUPER_ADMIN ]
+            lexing.admin.group.vehicle_to_mortgage:
+                # on_top:          true
+                label:           车辆借款
+                icon:            '<i class="fa fa-car"></i>'
+                items:
+                    - lexing_loan.admin.vehicle_to_mortgage
+                    - lexing_loan.admin.loan_product
+                roles: [ ROLE_ACCOUNTANT, ROLE_SUPER_ADMIN ]
+
+            lexing.admin.group.vehicle_to_repay:
+                on_top:          true
+                label:           车辆还款
+                icon:            '<i class="fa fa-car"></i>'
+                items:
+                    - lexing_loan.admin.vehicle_to_repay
+                roles: [ ROLE_ACCOUNTANT, ROLE_SUPER_ADMIN ]
+            lexing.admin.group.creditloan:
+#            lexing.admin.group.vehicle_mortgage_history
+                on_top: true
+                label:           车辆借贷历史
+                icon:            '<i class="fa fa-rmb"></i>'
+                roles: [ ROLE_ACCOUNTANT, ROLE_SUPER_ADMIN ]
+                items:
+#                    - lexing_loan.admin.credit_extension
+#                    - lexing_loan.admin.credit_application
+                    - lexing_loan.admin.vehicle_mortgage_history
+#            lexing.admin.group.else:
+#                label:           其他
+#                icon:            '<i class="fa fa-cog"></i>'
+#                items:
+#                    - nnv_gallery.admin.gallery
+#                    - nnv_taxonomy.admin.taxon
+
+stof_doctrine_extensions:
+    # default_locale: %locale%
+    class:
+        loggable: Lexing\AssistBundle\EventListener\LoggableListener
+    orm:
+        default:
+            tree: true
+            timestampable: true
+            loggable: true
+
+nnv_doctrine:
+    table_prefixes:
+        #namespace: prefix
+        Lexing: lx_
+        Nnv: nnv_
+
+nnv_gallery:
+#    naming:
+#        prefix: jww_
+    types:
+        # - { key: vehicle, label: 车辆, entity: Lexing\VehicleBundle\Entity\Vehicle }
+        # - { key: cert, label: 证件 }
+        # - { key: order,   label: 订单, entity: Jww\OrderBundle\Entity\Order }
+
+lexing_vehicle:
+    galleries:
+        vehicle.content:
+            name: 详情
+            about: whatever
+            template: tpl.twig
+        mortgage.contract:
+            name: 抵押合同
+            about: whatever
+            template: tpl.twig
+        sales.contract:
+            name: 买卖合同
+            about: whatever
+            template: tpl.twig
+        lease.contract:
+            name: 租赁合同
+            about: whatever
+            template: tpl.twig
+lexing_trade:
+    # types: decl
+    handlers:
+        # type: handler service
+        vehicle.sale: lexing_trade.vehicle_sale_handler
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,4 @@
+{# if admin.isGranted('DELETE', object) and admin.hasRoute('delete') #}
+    <a href="{{ path('nnv_gallery_manage', {'id':object.id}) }}" class="btn btn-sm btn-default" title="内容管理">
+        <i class="glyphicon glyphicon-picture"></i>
+    </a>

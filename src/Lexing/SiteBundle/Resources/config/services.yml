@@ -1,0 +1,4 @@
+services:
+#    lexing_site.example:
+#        class: Lexing\SiteBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]

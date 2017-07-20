@@ -1,0 +1,22 @@
+Name:             客户名称
+Short Name:       客户简称
+Mart:             归属车城
+Customer No:      客户编码
+Site No:          场地编号
+Square Price:     平方单价
+Rented:           租用面积
+Deposit:          保证金
+Contact Phone:    联系方式
+Wpos User:        旺POS绑定用户
+Credit Extension Amount: 授信金额
+
+Nb Total Vehicles:   车辆总数
+Nb On Sale Vehicles:    已上架数
+Nb Off Sale Vehicles:    已下架数
+Used Credit:   已借款总额
+Available Credit:    可用额度（万元）
+Vehicle Dealer List:  车商列表
+Vehicle Dealer Create:  添加车商
+Credit Extension Amount In10 K: 授信金额（万元）
+Used Credit In10 K: 已用额度（万元）
+Available Credit In10 K: 可用额度（万元)

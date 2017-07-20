@@ -1,0 +1,22 @@
+{% extends sonata_block.templates.block_base %}
+
+{% block block %}
+
+    <div class="box box-danger list-group">
+        <div class="box-header with-border">
+            <h3 class="box-title">到期通知</h3>
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+            </div>
+        </div>
+        <div class="box-body">
+            {% for vehicleMortgage in vehicleMortgages %}
+                <div>
+                    <a target="_blank" href="{{ path("admin_lexing_vehicle_vehicletorepay_edit", {id:vehicleMortgage.id}) }}?action=repay">{{ vehicleMortgage.vehicle }}</a><b style="color: red;font-size: 16px">7日内还款</b>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

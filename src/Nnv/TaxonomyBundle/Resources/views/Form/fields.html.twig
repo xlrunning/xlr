@@ -1,0 +1,9 @@
+
+{% block taxon_with_root_widget %}
+    {{- block('choice_widget') -}}
+{#    {% if choices|length == 0 %}#}
+        <a style="display: inline-block; padding-top: 4px;" href="{{ path('admin_nnv_taxonomy_taxon_create', {'root':root}) }}">
+            如需要请先添加{{ label }}
+        </a>
+{#    {% endif %}#}
+{% endblock taxon_with_root_widget %}

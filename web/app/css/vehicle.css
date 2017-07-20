@@ -1,0 +1,354 @@
+body {
+    background-color: #eeeeee;
+}
+
+#vehicle_upload_input {
+    display: none;
+}
+
+.vehicle_upload_img {
+    padding: 20px;
+    text-align: center;
+    background-color: #fff;
+    border-bottom: 1px solid #e1e1e1;
+}
+
+.vehicle_upload_label {
+    font-size: 50px;
+    line-height: 100px;
+    color: #d1d1d1;
+    font-weight: lighter;
+    width: 100%;
+    display: block;
+    border: 1px dashed #d1d1d1;
+    background-color: #f1f1f1;
+}
+
+.vehicle_upload_img_title {
+    margin-top: 10px;
+    color: #d1d1d1;
+    font-size: 14px;
+}
+
+.vehicle_info_title {
+    border-bottom: 1px solid #e1e1e1;
+    background-color: #eeeeee;
+    padding-left: 20px;
+    color: #888;
+    font-size: 16px;
+    padding-bottom: 10px;
+}
+
+.vehicle_info_b {
+    background-color: #fff;
+    margin-top: 10px;
+
+}
+
+.vehicle_info_detail ul li {
+    border-bottom: 1px solid #e1e1e1;
+    /* 兼容android4.4以下 flex */
+    display: flex;
+    display: -webkit-box;
+    align-items: center;
+    -webkit-box-align: center;
+    /* 兼容android4.4以下 flex */
+    font-size: 16px;
+    line-height: 32px;
+    margin: 0px 20px;
+    padding: 5px 0px;
+}
+
+.vehicle_info_left {
+    flex: 1;
+    -webkit-box-flex: 1;
+    width: 40%;
+}
+
+.vehicle_info_right {
+    width: 60%;
+    font-size: 16px;
+}
+
+.vehicle_info_right select {
+    border: none;
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAwAAAAJCAYAAAAGuM1UAAAAH0lEQVR42mNgoDnQ13f7TwiTpIkkm0hyHkl+YhhQAABcfyjsqSyTLgAAAABJRU5ErkJggg==) no-repeat scroll right center transparent;
+    padding-right: 14px;
+    width: 10rem;;
+    font-size: 16px;
+    color: #757575;
+}
+
+.vehicle_info_right input {
+    width: 10rem;
+    font-size: 16px;
+    border: none;
+    padding: 5px 0px;
+}
+
+/** color select **/
+
+.vehicle_color_silver:before{
+    content: '';
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    -moz-border-radius: 7.5px;
+    -webkit-border-radius: 7.5px;
+    border-radius: 7.5px;
+    background-color: #c0c0c0;
+    margin-right: 5px;
+}
+
+.vehicle_color_gray:before{
+    content: '';
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    -moz-border-radius: 7.5px;
+    -webkit-border-radius: 7.5px;
+    border-radius: 7.5px;
+    background-color: #888687;
+    margin-right: 5px;
+}
+
+.vehicle_color_black:before{
+    content: '';
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    -moz-border-radius: 7.5px;
+    -webkit-border-radius: 7.5px;
+    border-radius: 7.5px;
+    background-color: #010101;
+    margin-right: 5px;
+}
+
+.vehicle_color_white:before{
+    content: '';
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    -moz-border-radius: 7.5px;
+    -webkit-border-radius: 7.5px;
+    border-radius: 7.5px;
+    background-color: #ffffff;
+    margin-right: 5px;
+    border: 1px solid #e1e1e1;
+}
+
+.vehicle_color_red:before{
+    content: '';
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    -moz-border-radius: 7.5px;
+    -webkit-border-radius: 7.5px;
+    border-radius: 7.5px;
+    background-color: #ca2128;
+    margin-right: 5px;
+}
+
+.vehicle_color_blue:before{
+    content: '';
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    -moz-border-radius: 7.5px;
+    -webkit-border-radius: 7.5px;
+    border-radius: 7.5px;
+    background-color: #396bb2;
+    margin-right: 5px;
+}
+
+.vehicle_color_coffee:before{
+    content: '';
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    -moz-border-radius: 7.5px;
+    -webkit-border-radius: 7.5px;
+    border-radius: 7.5px;
+    background-color: #724524;
+    margin-right: 5px;
+}
+
+.vehicle_color_champagne:before{
+    content: '';
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    -moz-border-radius: 7.5px;
+    -webkit-border-radius: 7.5px;
+    border-radius: 7.5px;
+    background-color: #e7d3ae;
+    margin-right: 5px;
+}
+
+.vehicle_color_yellow:before{
+    content: '';
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    -moz-border-radius: 7.5px;
+    -webkit-border-radius: 7.5px;
+    border-radius: 7.5px;
+    background-color: #ffde01;
+    margin-right: 5px;
+}
+
+.vehicle_color_purple:before{
+    content: '';
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    -moz-border-radius: 7.5px;
+    -webkit-border-radius: 7.5px;
+    border-radius: 7.5px;
+    background-color: #78386a;
+    margin-right: 5px;
+}
+
+.vehicle_color_green:before{
+    content: '';
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    -moz-border-radius: 7.5px;
+    -webkit-border-radius: 7.5px;
+    border-radius: 7.5px;
+    background-color: #98ca67;
+    margin-right: 5px;
+}
+
+.vehicle_color_orange:before{
+    content: '';
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    -moz-border-radius: 7.5px;
+    -webkit-border-radius: 7.5px;
+    border-radius: 7.5px;
+    background-color: #f07a22;
+    margin-right: 5px;
+}
+
+.vehicle_color_pink:before{
+    content: '';
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    -moz-border-radius: 7.5px;
+    -webkit-border-radius: 7.5px;
+    border-radius: 7.5px;
+    background-color: #febecc;
+    margin-right: 5px;
+}
+
+.vehicle_color_brown:before{
+    content: '';
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    -moz-border-radius: 7.5px;
+    -webkit-border-radius: 7.5px;
+    border-radius: 7.5px;
+    background-color: #724524;
+    margin-right: 5px;
+}
+
+.vehicle_color_other:before{
+    content: '';
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    -moz-border-radius: 7.5px;
+    -webkit-border-radius: 7.5px;
+    border-radius: 7.5px;
+    background-color: #ffffff;
+    margin-right: 5px;
+    border: 1px solid #e1e1e1;
+}
+
+/** color select end**/
+
+#showDatePicker, #vehicle_color{
+    color: #757575;
+}
+
+.vehicle_info_detail li:last-child{
+    margin-bottom: 30px;
+    border: none;
+}
+
+.vehicle_img{
+    max-width: 270px;
+    margin: 0 auto;
+}
+
+.vehicle_img_b{
+    position: relative;
+    float: left;
+    width: 70px;
+    height: 70px;
+    margin: 10px;
+    border:1px solid #888;
+}
+
+.vehicle_img_b_delete{
+    width: 20px;
+    height: 20px;
+    line-height: 18px;
+    font-size: 14px;
+    color: #fff;
+    display: block;
+    background-color: rgba(0,0,0, .8);
+    border-radius: 20px;
+    position: absolute;
+    right: -10px;
+    top: -10px;
+    font-weight: lighter;
+    z-index: 9999;
+}
+
+.vehicle_img_b_w{
+    width: 100%;
+    height: 100%;
+}
+
+.clearfix{
+    clear: both;
+}
+
+.none{
+    display: none;
+    visibility: hidden;
+}
+
+.upload_process{
+    position: absolute;
+    left:0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,.5);
+    line-height: 70px;
+}
+
+.add_vehicle_submit{
+    text-align: center;
+    margin: 20px 0px;
+}
+
+.add_vehicle_submit_btn{
+    background-color: #5ac2fa;
+    border: none;
+    width: 80%;
+    padding: 10px;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 10px;
+}

@@ -1,0 +1,144 @@
+
+{% extends "SonataAdminBundle:CRUD:base_edit.html.twig" %}
+
+{% block formactions %}
+    <div class="sonata-ba-form-actions well well-small form-actions clearfix">
+        {% block sonata_form_actions %}
+            {% if app.request.isxmlhttprequest %}
+                {% if admin.id(object) is not null %}
+                    <button type="submit" class="btn btn-success" name="btn_update"><i class="fa fa-save" aria-hidden="true"></i> {{ 'btn_update'|trans({}, 'SonataAdminBundle') }}</button>
+                {% else %}
+                    <button type="submit" class="btn btn-success" name="btn_create"><i class="fa fa-plus-circle" aria-hidden="true"></i> {{ 'btn_create'|trans({}, 'SonataAdminBundle') }}</button>
+                {% endif %}
+            {% else %}
+                {% if admin.supportsPreviewMode %}
+                    <button class="btn btn-info persist-preview" name="btn_preview" type="submit">
+                        <i class="fa fa-eye" aria-hidden="true"></i>
+                        {{ 'btn_preview'|trans({}, 'SonataAdminBundle') }}
+                    </button>
+                {% endif %}
+
+                <input type="hidden" name="action" value="{{ app.request.get('action') }}" />
+                <input type="hidden" name="vehicle" value="{{ app.request.get('vehicle') }}" />
+                {% if admin.id(object) is not null %}
+                    {# 添加修改相关action #}
+                    {% if not object.repaid %}
+                        {% if app.request.get('action') == 'repay' %}
+                            <button type="submit" class="btn btn-success" name="btn_repay"><i class="fa fa-save" aria-hidden="true"></i> 确定还款</button>
+                        {% else %}
+                            <a class="btn btn-warning" href="{{ path('admin_lexing_loan_vehiclemortgage_edit', {'id':object.id, 'action':'repay'}) }}">还款</a>
+                        {% endif %}
+                    {% endif %}
+                {% else %}
+                    <button type="submit" class="btn btn-success" name="btn_loan"><i class="fa fa-save" aria-hidden="true"></i> 确定借款</button>
+                {% endif %}
+
+                <div class="pull-right">
+                    {% if admin.id(object) is not null %}
+
+                        {#<button type="submit" class="btn btn-warning" name="btn_update_and_edit"><i class="fa fa-save" aria-hidden="true"></i> {{ 'btn_update_and_edit_again'|trans({}, 'SonataAdminBundle') }}</button>#}
+
+                        {#{% if admin.hasroute('list') and admin.isGranted('LIST') %}#}
+                        {#<button type="submit" class="btn btn-success" name="btn_update_and_list"><i class="fa fa-save"></i> <i class="fa fa-list" aria-hidden="true"></i> {{ 'btn_update_and_return_to_list'|trans({}, 'SonataAdminBundle') }}</button>#}
+                        {#{% endif %}#}
+
+                        {#{% if admin.hasroute('delete') and admin.isGranted('DELETE', object) %}#}
+                        {#{{ 'delete_or'|trans({}, 'SonataAdminBundle') }}#}
+                        {#<a class="btn btn-danger" href="{{ admin.generateObjectUrl('delete', object) }}"><i class="fa fa-minus-circle" aria-hidden="true"></i> {{ 'link_delete'|trans({}, 'SonataAdminBundle') }}</a>#}
+                        {#{% endif %}#}
+
+                        {% if admin.isAclEnabled() and admin.hasroute('acl') and admin.isGranted('MASTER', object) %}
+                            <a class="btn btn-info" href="{{ admin.generateObjectUrl('acl', object) }}"><i class="fa fa-users" aria-hidden="true"></i> {{ 'link_edit_acl'|trans({}, 'SonataAdminBundle') }}</a>
+                        {% endif %}
+                    {% else %}
+                        {#{% if admin.hasroute('edit') and admin.isGranted('EDIT') %}#}
+                            {#<button class="btn btn-success" type="submit" name="btn_create_and_edit"><i class="fa fa-save" aria-hidden="true"></i> {{ 'btn_create_and_edit_again'|trans({}, 'SonataAdminBundle') }}</button>#}
+                        {#{% endif %}#}
+                        {#{% if admin.hasroute('list') and admin.isGranted('LIST') %}#}
+                            {#<button type="submit" class="btn btn-success" name="btn_create_and_list"><i class="fa fa-save"></i> <i class="fa fa-list" aria-hidden="true"></i> {{ 'btn_create_and_return_to_list'|trans({}, 'SonataAdminBundle') }}</button>#}
+                        {#{% endif %}#}
+                        {#<button class="btn btn-success" type="submit" name="btn_create_and_create"><i class="fa fa-plus-circle" aria-hidden="true"></i> {{ 'btn_create_and_create_a_new_one'|trans({}, 'SonataAdminBundle') }}</button>#}
+                    {% endif %}
+                </div>
+            {% endif %}
+        {% endblock %}
+    </div>
+{% endblock formactions %}
+{% block mortgageJavascripts %}
+    <script type="text/javascript">
+        $('input[id$="_amountIn10K"]').on('input',function () {
+            var loanProduct = $("#select2-chosen-1").text();
+            var capitalYuan = $(this).val();
+            var match = capitalYuan.match(/^((?!0[0-9])\d+(\.\d{0,1})?)$/);
+            if(match != null){
+                $(this).val(match[0]);
+            }if(match == null){
+                $(this).val("");
+            }
+            if(!(/\d{1,}/g).test(loanProduct)){
+                if($(this).val() == ""){
+                    $('#amount-to-repay').text("请选择贷款产品并填写借款金额！");
+                }else
+                    $('#amount-to-repay').text("请选择贷款产品！");
+            }else if(loanProduct.match(/\d{1,}/g).length == 2){
+                if($(this).val() == ""){
+                    $('#amount-to-repay').text("请填写贷款金额！");
+                }else{
+                    var periodByMonth = loanProduct.match(/\d{1,}/g)[0];
+                    var interestPercentageByYear = loanProduct.match(/\d{1,}/g)[1];
+                    var amountToRepay = $(this).val() * periodByMonth * (interestPercentageByYear / 0.12);
+                    $("#amount-to-repay").text(amountToRepay.toFixed(1) + "元。");
+                }
+            }else if(loanProduct.match(/\d{1,}/g).length == 3){
+                if($(this).val() == ""){
+                    $('#amount-to-repay').text("请填写贷款金额！");
+                }else {
+                    var days = loanProduct.match(/\d{1,}/g)[0];
+                    var periodByMonth = loanProduct.match(/\d{1,}/g)[1];
+                    var interestPercentageByYear = loanProduct.match(/\d{1,}/g)[2];
+                    var amountMin = $(this).val() * days * (interestPercentageByYear / 3.6);
+                    var amountMax = $(this).val() * periodByMonth * (interestPercentageByYear / 0.12);
+                    $("#amount-to-repay").text("最少：" + amountMin.toFixed(1) + "元，最多：" + amountMax.toFixed(1) + "元。");
+                }
+            }
+        })
+
+        $('input[id$="_amountIn10K"]').on('change',function () {
+            var capitalYuan = $(this).val();
+            if(/\.$/.test(capitalYuan)){
+                $(this).val(capitalYuan.substr(0, capitalYuan.length - 1));
+            }
+        })
+
+        $("select[id$='_loanProduct']").on('click',function(){
+            var loanProduct = $("#select2-chosen-1").text();
+            var capitalYuan = $('input[id$="_amountIn10K"]').val();
+            if(!(/\d{1,}/g).test(loanProduct)){
+                if(capitalYuan == ""){
+                    $('#amount-to-repay').text("请选择贷款产品并填写借款金额！");
+                }else
+                    $('#amount-to-repay').text("请选择贷款产品");
+            }else if(loanProduct.match(/\d{1,}/g).length == "2"){
+                if(capitalYuan == ""){
+                    $('#amount-to-repay').text("请填写贷款金额！");
+                }else{
+                    var periodByMonth = loanProduct.match(/\d{1,}/g)[0];
+                    var interestPercentageByYear = loanProduct.match(/\d{1,}/g)[1];
+                    var amountToRepay = $(this).val() * periodByMonth * (interestPercentageByYear / 0.12);
+                    $("#amount-to-repay").text(amountToRepay.toFixed(1) + "元。");
+                }
+            }else if(loanProduct.match(/\d{1,}/g).length == "3"){
+                if(capitalYuan == ""){
+                    $('#amount-to-repay').text("请填写贷款金额！");
+                }else {
+                    var days = loanProduct.match(/\d{1,}/g)[0];
+                    var periodByMonth = loanProduct.match(/\d{1,}/g)[1];
+                    var interestPercentageByYear = loanProduct.match(/\d{1,}/g)[2];
+                    var amountMin = capitalYuan * days * (interestPercentageByYear / 3.6);
+                    var amountMax = capitalYuan * periodByMonth * (interestPercentageByYear / 0.12);
+                    $("#amount-to-repay").text("最少：" + amountMin.toFixed(1) + "元，最多：" + amountMax.toFixed(1) + "元。");
+                }
+            }
+        })
+    </script>
+{% endblock %}

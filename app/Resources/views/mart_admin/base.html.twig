@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>{% block title %}{{ site.name }}{% endblock %}</title>
+
+    <!-- Site Icons -->
+    <link rel="apple-touch-icon" href="{{ asset('themes/roosa/img/apple-touch-icon.png') }}">
+    <link rel="icon" href="{{ asset('themes/roosa/img/icon.ico') }}">
+
+    <link rel="stylesheet" href="{{ asset('bootstrap/css/bootstrap.min.css') }}">
+
+    <!-- Icon Fonts -->
+    <link rel="stylesheet" href="{{ asset('themes/roosa/icons/entypo/entypo.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('themes/roosa/icons/fa/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('themes/roosa/css/bootstrap.custom.css') }}">
+    <link rel="stylesheet" href="{{ asset('themes/roosa/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('themes/roosa/css/horizontal-menu.css') }}">
+    <link rel="stylesheet" href="{{ asset('themes/roosa/css/helper.css') }}">
+    {% block stylesheets %}{% endblock %}
+</head>
+
+<body class="rs-boxed-layout bg-grad-03">
+
+    <!--[if lt IE 8]>
+    <p class="browserupgrade">你在使用<strong>过时的</strong>浏览器。 请升级浏览器提升体验，建议使用Chrome</p>
+    <![endif]-->
+
+    <div id="rs-wrapper">
+
+        {% include 'mart_admin/_navbar.html.twig' %}
+
+        {% include 'mart_admin/_sidebar.html.twig' %}
+
+        <!-- BEGIN MAIN CONTENT -->
+        <article class="rs-content-wrapper">
+            <div class="rs-content">
+                <div class="rs-inner">
+
+                    <div class="rs-dashhead m-b-lg">
+                        <div class="rs-dashhead-content">
+                            <div class="rs-dashhead-titles">
+                                <h6 class="rs-dashhead-subtitle text-uppercase">Dashboard</h6>
+                                <h3 class="rs-dashhead-title m-t">Good Day, {{ app.user.username }}</h3>
+                                <!-- Begin Toolbar toggle button on mobile -->
+                                <div class="toggle-toolbar-btn">
+                                    <span class="fa fa-sort"></span>
+                                </div><!-- /.toggle-toolbar-btn -->
+                                <!-- End Toolbar toggle button on mobile -->
+                            </div><!-- /.rs-dashhead-titles -->
+                            <div class="rs-dashhead-toolbar" style="margin-top: -20px;">
+                                <a href="#" class="btn btn-success btn-wide rs-btn-icon block-on-mobile">
+                                    <span class="gcon gcon-add-to-list icon-btn"></span>
+                                    新增车商
+
+                                </a>
+                            </div><!-- /.rs-dashhead-toolbar -->
+                        </div><!-- /.rs-dashhead-content -->
+                        <!-- Begin Breadcrumb -->
+                        <ol class="breadcrumb">
+                            {% set bread = app.request.get('_route')|split('_') %}
+                            {% set tranArr = {"mart":'市场',"admin":"管理","vehicle":"车辆","dealer":"经销商","list":"列表","add":"添加"} %}
+                            <li><a href="javascript:void(0);"><i class="fa fa-home m-r"></i>
+                                    {{ bread[1]|trans(tranArr) }}
+                                </a></li>
+                            <li><a href="javascript:void(0);">
+                                    {{ bread[2]|trans(tranArr) }}
+                                </a></li>
+                            <li class="active">
+                                {{ bread[3]|trans(tranArr) }}
+                            </li>
+                        </ol>
+                        <!-- End Breadcrumb -->
+                    </div>
+
+                    <!-- Begin default content width -->
+                    <div class="container-fluid">
+
+                        {% block content %}
+                        {% endblock %}
+
+                    </div><!-- /.container-fluid -->
+                </div><!-- /.rs-inner -->
+            </div><!-- /.rs-content -->
+        </article><!-- /.rs-content-wrapper -->
+        <!-- END MAIN CONTENT -->
+
+
+        <!-- BEGIN FOOTER -->
+        <footer class="rs-footer absolute-footer">
+            <span class="text-muted small">&copy; 2017 {{ site.name }}</span>
+        </footer>
+        <!-- END FOOTER -->
+
+
+    </div><!-- /#rs-wrapper -->
+
+    <!-- Screen overlay is required -->
+    <div id="rs-screen-overlay"></div>
+
+    <script src=https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js></script>
+    <script>
+    window.jQuery || document.write('<script src="{{ asset('themes/roosa/js/vendor/jquery.min.js') }}"><\/script>')
+    </script>
+    <script src="{{ asset('themes/roosa/js/vendor/modernizr.min.js') }}"></script>
+    <script src="{{ asset('themes/roosa/js/vendor/jquery.min.js') }}"></script>
+    <script src="{{ asset('themes/roosa/js/vendor/bootstrap.min.js') }}"></script>
+
+    <script src="{{ asset('themes/roosa/plugins/nicescroll/jquery.nicescroll.min.js') }}"></script>
+    <script src="{{ asset('themes/roosa/plugins/ismobile/isMobile.min.js') }}"></script>
+    <script src="{{ asset('themes/roosa/plugins/blockui/blockui.min.js') }}"></script>
+    <script src="{{ asset('js/_sidebar_select_navbar.js') }}"></script>
+    {#<script src="{{ asset('themes/roosa/plugins/prettify/prettify.min.js') }}"></script>#}
+    {#<script src="{{ asset('themes/roosa/plugins/clipboard/clipboard.min.js') }}"></script>#}
+
+    {% block javascripts %}{% endblock %}
+
+    <!-- Template Js -->
+    <script src="{{ asset('themes/roosa/js/apps.js') }}"></script>
+    <script src="{{ asset('themes/roosa/js/layout-default.js') }}"></script>
+
+</body>
+</html>

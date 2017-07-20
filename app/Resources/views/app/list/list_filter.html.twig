@@ -1,0 +1,17 @@
+<div class="filterbar-container">
+    <ul id="ul-mean">
+        <li class="active">
+            <select name="brand" id="select-brand" style="font-size: 14px;width: 50px;">
+                <option value="" style="display: none">品牌</option>
+                <option value="">全部品牌</option>
+                {% for brand in brandArr %}
+                    <option value="{{ brand.name }}">{{ brand.name }}</option>
+                {% endfor %}
+            </select>
+            {#<span class="arrow"></span>#}
+        </li>
+        <li>状态</li>
+        <li>排序</li>
+        <li>筛选</li>
+    </ul>
+</div>

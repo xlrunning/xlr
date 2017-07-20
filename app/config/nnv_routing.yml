@@ -1,0 +1,20 @@
+
+#nnv_area:
+#    resource: "@NnvAreaBundle/Controller/"
+#    type:     annotation
+#    prefix:   /
+#
+nnv_form:
+    resource: "@NnvFormBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+nnv_notification:
+    resource: "@NnvNotificationBundle/Controller/"
+    type:     annotation
+    prefix:   /
+    
+nnv_gallery:
+    resource: "@NnvGalleryBundle/Controller/"
+    type:     annotation
+    prefix:   /

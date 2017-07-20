@@ -1,0 +1,2 @@
+$('.rs-datepicker').datepicker();
+

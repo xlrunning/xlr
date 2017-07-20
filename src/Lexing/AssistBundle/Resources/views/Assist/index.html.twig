@@ -1,0 +1,170 @@
+{#{{ render(controller('SofashionAssistBundle:Assist:stats')) }}#}
+
+<style>
+    .list-group {
+        max-width: 500px;
+    }
+</style>
+{#
+<div class="panel panel-default">
+    <div class="panel-heading"><i class="fa fa-list-ol"></i> 省市编号批量设置</div>
+    <div class="panel-body">
+        <p>已经人工设置了 <strong>{{ areaNumbers|length }}</strong> 省市的编号，其余编号将自动设置（其余 <strong>{{ allAreaNumbers|length - areaNumbers|length }}/{{ 34 - areaNumbers|length  }}</strong> 已设置）</p>
+        <a href="{{path('ok_assist_area_numbers')}}" class="btn btn-primary">确 认</a>
+    </div>
+</div>
+#}
+{#<!-- DONUT CHART -->#}
+<div class="box box-danger list-group">
+    <div class="box-header with-border">
+        <h3 class="box-title">操作记录</h3>
+        <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+            </button>
+            <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+        </div>
+    </div>
+    <div class="box-body">
+        {% include 'logs.html.twig' with {logEntries:logEntries} %}
+    </div>
+    <!-- /.box-body -->
+</div>
+<!-- /.box -->
+
+{#<!-- DONUT CHART -->#}
+{#<div class="box box-danger list-group">#}
+    {#<div class="box-header with-border">#}
+        {#<h3 class="box-title">车城分布图</h3>#}
+        {#<div class="box-tools pull-right">#}
+            {#<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>#}
+            {#</button>#}
+            {#<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>#}
+        {#</div>#}
+    {#</div>#}
+    {#<div class="box-body">#}
+        {#<canvas id="mart-chart" width="200" height="100"></canvas>#}
+    {#</div>#}
+    {#<!-- /.box-body -->#}
+{#</div>#}
+{#<!-- /.box -->#}
+
+
+
+
+{#<script src="{{ asset('themes/roosa/plugins/chart-js/Chart.js') }}"></script>#}
+{#<script>#}
+    {#function getRandomInt(min, max) {#}
+        {#min = Math.ceil(min);#}
+        {#max = Math.floor(max);#}
+        {#return Math.floor(Math.random() * (max - min)) + min;#}
+    {#}#}
+    {#var mart_chart = document.getElementById("mart-chart");#}
+    {#var data = {#}
+        {#labels: [#}
+            {#"广州",#}
+            {#"上海",#}
+            {#"北京",#}
+            {#"深圳",#}
+            {#"浙江"#}
+        {#],#}
+        {#datasets: [#}
+            {#{#}
+                {#data: [getRandomInt(58,88), getRandomInt(8,88), getRandomInt(8,88),getRandomInt(8,88),getRandomInt(8,88)],#}
+                {#backgroundColor: [#}
+                    {#"#00c0ef",#}
+                    {#"#36A2EB",#}
+                    {#"#FFCE56",#}
+                    {#"#00a65a",#}
+                    {#"#ff851b"#}
+                {#],#}
+                {#hoverBackgroundColor: [#}
+                    {#"#00c0ef",#}
+                    {#"#36A2EB",#}
+                    {#"#FFCE56",#}
+                    {#"#00a65a",#}
+                    {#"#ff851b"#}
+                {#]#}
+            {#}]#}
+    {#};#}
+    {#var myDoughnutChart = new Chart(mart_chart, {#}
+        {#type: "doughnut",#}
+        {#data: data,#}
+        {#options: {#}
+            {#animation: {#}
+                {#animateScale: true#}
+            {#}#}
+        {#}#}
+    {#});#}
+
+
+    {#//line chart#}
+    {#var config = {#}
+        {#type: 'line',#}
+        {#data: {#}
+            {#labels: ["一月份", "二月份", "三月份", "四月份", "五月份", "六月份", "七月份"],#}
+            {#datasets: [{#}
+                {#label: "汽车城总数量",#}
+                {#backgroundColor: "#36A2EB",#}
+                {#borderColor: "#36A2EB",#}
+                {#data: [#}
+                    {#getRandomInt(100,200),#}
+                    {#getRandomInt(200,300),#}
+                    {#getRandomInt(300,400),#}
+                    {#getRandomInt(400,500),#}
+                    {#getRandomInt(500,600),#}
+                    {#getRandomInt(600,700),#}
+                    {#getRandomInt(700,800)#}
+                {#],#}
+                {#fill: false#}
+            {#}, {#}
+                {#label: "经销商总数量",#}
+                {#fill: false,#}
+                {#backgroundColor:"#FFCE56",#}
+                {#borderColor: "#FFCE56",#}
+                {#data: [#}
+                    {#getRandomInt(300,399),#}
+                    {#getRandomInt(400,499),#}
+                    {#getRandomInt(500,599),#}
+                    {#getRandomInt(600,699),#}
+                    {#getRandomInt(700,799),#}
+                    {#getRandomInt(800,899),#}
+                    {#getRandomInt(900,999)#}
+                {#]#}
+            {#}]#}
+        {#},#}
+        {#options: {#}
+            {#responsive: true,#}
+            {#title:{#}
+                {#display:true,#}
+                {#text:'经销商车城趋势图'#}
+            {#},#}
+            {#tooltips: {#}
+                {#mode: 'index',#}
+                {#intersect: false,#}
+            {#},#}
+            {#hover: {#}
+                {#mode: 'nearest',#}
+                {#intersect: true#}
+            {#},#}
+            {#scales: {#}
+                {#xAxes: [{#}
+                    {#display: true,#}
+                    {#scaleLabel: {#}
+                        {#display: true,#}
+                        {#labelString: '月份'#}
+                    {#}#}
+                {#}],#}
+                {#yAxes: [{#}
+                    {#display: true,#}
+                    {#scaleLabel: {#}
+                        {#display: true,#}
+                        {#labelString: '数'#}
+                    {#}#}
+                {#}]#}
+            {#}#}
+        {#}#}
+    {#};#}
+
+    {#var vehicle_stock = document.getElementById("vehicle-stock");#}
+    {#var myDoughnutChart = new Chart(vehicle_stock, config);#}
+{#</script>#}

@@ -1,0 +1,21 @@
+<style>
+    .vehicle-gallery img { width: 100px !important; }
+</style>
+<script src="{{ asset('js/blazy.min.js') }}"></script>
+{% set gallery = object.galleries['vehicle.content'] is defined ? object.galleries['vehicle.content'] : null %}
+<td class="vehicle-gallery-wrapper">
+    {% if gallery %}
+        {% for item in gallery.items %}
+            {% if loop.first %}
+                <a class="vehicle-gallery" href="{{ path('lx_vehicle_gallery', {code:'vehicle.content', id:object.id}) }}">
+                    <img class="b-lazy" title="{{ item.metaContent }}" data-src="{{ asset('uploads/gallery/' ~ item.pic) }}" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" />
+                </a>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+</td>
+<script>
+    $(function(){
+        new Blazy();
+    });
+</script>

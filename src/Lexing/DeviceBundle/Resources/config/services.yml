@@ -1,0 +1,20 @@
+services:
+#    lexing_device.example:
+#        class: Lexing\DeviceBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]
+
+    lexing_device.device_signhelper:
+        class: Lexing\DeviceBundle\Service\DeviceSignHelper
+        calls:
+            - [setContainer, ["@service_container"]]
+
+    lexing_device.uuid_token_authenticator:
+        class: Lexing\DeviceBundle\Security\UuidTokenAuthenticator
+        calls:
+            - [setContainer, ["@service_container"]]
+
+    lexing_device.admin.device:
+        class: Lexing\DeviceBundle\Admin\DeviceAdmin
+        arguments: [~, Lexing\DeviceBundle\Entity\Device, SonataAdminBundle:CRUD]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: 终端设备 }

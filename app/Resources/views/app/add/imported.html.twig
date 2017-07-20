@@ -1,0 +1,77 @@
+<div id="form_of_imported">
+<li>
+    <div class="vehicle_info_left">
+        <span>库存状态</span>
+    </div>
+    <div class="vehicle_info_right">
+        <select name="imported_on_sale" id="">
+            <option value="1" selected>在库</option>
+            <option value="0">下库</option>
+        </select>
+    </div>
+</li>
+<li>
+    <div class="vehicle_info_left">
+        <span>库存数量</span>
+    </div>
+    <div class="vehicle_info_right">
+        <input type="text" name="imported_stock" class="vehicle_info_detail_vin_i" placeholder="库存数量" maxlength="17">
+    </div>
+</li>
+<li>
+    <div class="vehicle_info_left">
+        <span>备注信息</span>
+    </div>
+    <div class="vehicle_info_right">
+        <input type="text" name="imported_info" class="vehicle_info_detail_vin_i" placeholder="备注信息" maxlength="17">
+    </div>
+</li>
+<li>
+    <div class="vehicle_info_left">
+        <span>车身颜色</span>
+    </div>
+    <div class="vehicle_info_right">
+        <div id="imported_vehicle_color">颜色</div>
+        <input type="hidden" name="imported_color" id="imported_vehicle_color_val" placeholder="颜色">
+    </div>
+</li>
+    <li>
+        <div class="vehicle_info_left">
+            <span>品牌</span>
+        </div>
+        <div class="vehicle_info_right">
+            <select name="imported_brand" v-model="brand_selected" v-on:change="changeSeries">
+                <option value="" selected>请选择</option>
+                <option v-for="option in brand_options" v-bind:value="option.value">
+                    ${ option.text }
+                </option>
+            </select>
+        </div>
+    </li>
+    <li>
+        <div class="vehicle_info_left">
+            <span>车系</span>
+        </div>
+        <div class="vehicle_info_right">
+            <select name="imported_series" v-model="series_selected" v-on:change="changeModels">
+                <option value="" selected>请选择</option>
+                <option v-for="option in series_options" v-bind:value="option.value">
+                    ${ option.text }
+                </option>
+            </select>
+        </div>
+    </li>
+    <li>
+        <div class="vehicle_info_left">
+            <span>车型</span>
+        </div>
+        <div class="vehicle_info_right">
+            <select name="imported_model" v-model="model_selected">
+                <option value="" selected>请选择</option>
+                <option v-for="option in model_options" v-bind:value="option.value">
+                    ${ option.text }
+                </option>
+            </select>
+        </div>
+    </li>
+</div>

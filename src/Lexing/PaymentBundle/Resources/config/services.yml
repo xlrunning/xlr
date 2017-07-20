@@ -1,0 +1,23 @@
+services:
+#    lexing_payment.example:
+#        class: Lexing\PaymentBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]
+    lexing_payment.swiftpass_gateway:
+        class: Lexing\PaymentBundle\Gateway\SwiftPassGateway
+        public: false
+        arguments: ["%swiftpass_mchid%", "%swiftpass_mchkey%"]
+        calls:
+            - [setContainer, ["@service_container"]]
+
+    lexing_payment.wangpos_gateway:
+        class: Lexing\PaymentBundle\Gateway\WangPosGateway
+        # public: false
+        # arguments: ["%swiftpass_mchid%", "%swiftpass_mchkey%"]
+        calls:
+            - [setContainer, ["@service_container"]]
+
+    lexing_payment.payment_manager:
+        class: Lexing\PaymentBundle\Service\PaymentManager
+        arguments: ["@lexing_payment.swiftpass_gateway"]
+        calls:
+            - [setContainer, ["@service_container"]]

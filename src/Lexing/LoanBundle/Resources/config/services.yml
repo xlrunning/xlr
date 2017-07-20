@@ -1,0 +1,60 @@
+services:
+#    lexing_loan.example:
+#        class: Lexing\LoanBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]
+    lexing_loan.admin.credit_extension:
+        class: Lexing\LoanBundle\Admin\CreditExtensionAdmin
+        arguments: [~, Lexing\LoanBundle\Entity\CreditExtension, SonataAdminBundle:CRUD]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: credit, label: 授信 }
+
+    lexing_loan.admin.credit_application:
+        class: Lexing\LoanBundle\Admin\CreditApplicationAdmin
+        arguments: [~, Lexing\LoanBundle\Entity\CreditApplication, SonataAdminBundle:CRUD]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: credit, label: 授信申请 }
+
+    lexing_loan.admin.vehicle_mortgage:
+        class: Lexing\LoanBundle\Admin\VehicleMortgageAdmin
+        arguments: [~, Lexing\LoanBundle\Entity\VehicleMortgage, LexingLoanBundle:VehicleMortgageAdmin]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: 车辆借贷历史 }
+        calls:
+            - [ setTemplate, [edit, admin/mortgage_edit.html.twig]]
+
+    lexing_loan.admin.vehicle_mortgage_history:
+        class: Lexing\LoanBundle\Admin\VehicleMortgageHistoryAdmin
+        arguments: [~, Lexing\LoanBundle\Entity\VehicleMortgage, LexingLoanBundle:VehicleMortgageAdmin]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: 车辆借贷历史 }
+
+    lexing_loan.admin.vehicle_to_mortgage:
+        class: Lexing\LoanBundle\Admin\VehicleToMortgageAdmin
+        arguments: [~, Lexing\VehicleBundle\Entity\Vehicle, SonataAdminBundle:CRUD]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: 车辆, label: 车辆借款 }
+
+    lexing_loan.admin.vehicle_to_repay:
+        class: Lexing\LoanBundle\Admin\VehicleToRepayAdmin
+        arguments: [~, Lexing\LoanBundle\Entity\VehicleMortgage, LexingLoanBundle:VehicleMortgageAdmin]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: 车辆, label: 车辆还款 }
+        calls:
+            - [ setTemplate, [edit, admin/mortgage_edit.html.twig]]
+
+    lexing_loan.repayment_calculator:
+        class: Lexing\LoanBundle\Service\RepaymentCalculator
+
+    lexing_loan.admin.loan_product:
+        class: Lexing\LoanBundle\Admin\LoanProductAdmin
+        arguments: [~, Lexing\LoanBundle\Entity\LoanProduct, SonataAdminBundle:CRUD]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: admin, label: 贷款产品 }
+
+    lexing.sonata.block.service.expire:
+        class: Lexing\LoanBundle\SonataBlock\ExpireBlockService
+        arguments: ["lexing.sonata.block.service.expire", "@templating"]
+        calls:
+            - [setContainer, ["@service_container"]]
+        tags:
+            - { name: "sonata.block" }

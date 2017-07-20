@@ -1,0 +1,60 @@
+{% extends  "app/appbase.html.twig" %}
+
+{% block title %}
+    关于乐行
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('app/css/about.css') }}?v=2">
+{% endblock %}
+
+{% block body %}
+    <div class="page">
+        <div class="about_header">
+            <div class="about_header_logo_body">
+                <img src="{{ asset('images/lx_logo_200.png') }}" alt="lexing_logo" class="about_header_logo">
+            </div>
+            <div class="about_header_vesion">
+                当前版本：v.0.0.1
+            </div>
+        </div>
+
+        <div data-collapse class="common_deposit margin-t-10">
+            <h2 class="open">
+                关于乐行
+                <img src="/app/img/arrow-right.png" alt="" class="common_arrow_img">
+            </h2>
+            <p>
+                乐行是一家背靠雄厚资本以二手车市场为主的新兴互联网融资租赁公司，致力于打造开放的生态系统，通过“互联网+”与金融助力车商融资，为车商和中小企业提供普惠金融服务。依靠移动互联、大数据、云计算为基础，乐行也与投资控股的公司及关联公司一起，在业务和服务层面通力合作，深度整合共推商业生态系统的繁荣。
+            </p>
+        </div>
+
+        <div data-collapse class="common_deposit margin-t-10 margin-b-10">
+            <h2 class="open">
+                关注我们
+                <img src="/app/img/arrow-right.png" alt="" class="common_arrow_img">
+            </h2>
+            <div class="about_follow">
+                <div class="about_follow_wx">
+                    <div class="about_follow_wx_title color-888888">
+                        <i class="about_follow_wx_logo"></i>微信公众号
+                    </div>
+                    <div class="about_follow_wx_account color-888888">
+                        lexing360
+                    </div>
+                </div>
+                <div class="about_follow_qrcode">
+                    <img src="{{ asset('app/img/qr-code.png') }}" alt="lx_qrcode" class="about_follow_qrcode_img">
+                    <div class="about_follow_qrcode_scan color-888888">(扫一扫添加关注)</div>
+                </div>
+            </div>
+        </div>
+
+        {% include "app/footer.html.twig" %}
+
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset("app/js/jquery.collapse.js") }}"></script>
+{% endblock %}

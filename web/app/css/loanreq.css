@@ -1,0 +1,178 @@
+body{
+    background-color: #eeeeee;
+}
+.loan_req {
+    display: flex;
+    text-align: center;
+    background-color: #fff;
+    border-bottom: 1px #e1e1e1 solid;
+    line-height: 30px;
+}
+
+.loan_dealer_name {
+    text-align: left;
+    padding-top: 10px;
+}
+
+.loan_left_title {
+    border-left: none;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    padding: 2px 15px 2px 15px;
+    background-color: #4db6f5;
+    color: #fff;
+
+    font-weight: lighter;
+}
+
+.loan_header {
+    text-align: center;
+    background: linear-gradient(70deg, #66ccff, #36a2eb);
+}
+
+.loan_dealer_limit {
+    padding: 20px;
+    padding-top: 10px;
+}
+
+.loan_dealer_title {
+    color: #fff;
+    font-weight: lighter;
+}
+
+.loan_dealer_money {
+    color: #fff;
+    font-size: 30px;
+    line-height: 60px;
+}
+
+.loan_dealer_border {
+    border-right: 1px solid #e1e1e1;
+}
+
+.loan_flow{
+    border-bottom: 1px solid #e1e1e1;
+    margin-top: 10px;
+}
+
+.loan_flow ul{
+    margin-left: 20px;
+    line-height: 35px;
+    font-size: 14px;
+    color: #d1d1d1;
+}
+
+.loan_flow ul li{
+    border-left: 1px solid #d1d1d1;
+    padding-left: 15px;
+    position: relative;
+}
+
+.loan_flow_status{
+    position: absolute;
+    left: -6px;
+    top: 34%;
+    width: 15px;
+    height: 11px;
+    background: url(../img/order-icons.png) -21px -72px no-repeat;
+}
+
+.loan_flow_status_choose{
+    background-position: 0px -72px;
+}
+
+.deposit{
+    background-color: #fff;
+    margin-top: 10px;
+}
+
+.deposit h2 a {
+    color: black;
+    text-decoration: none;
+    font-size: 16px;
+    line-height: 32px;
+    font-weight: normal;
+    width: 100%;
+    display: inline-block;
+    position: relative;
+}
+
+.loan_flow h2 {
+    text-align: left;
+    margin: 0px;
+    padding: 5px 20px;
+    border-bottom: 1px solid #e1e1e1;
+}
+
+.arrow-img {
+    width: 20px;
+    text-align: right;
+    position: absolute;
+    right: 10px;
+    top: 7px;
+}
+
+.loan_req_flow{
+    width: 100%;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.loan_req_flow_btn{
+    text-decoration: none;
+    color: #fff;
+    font-size: 20px;
+    background: #5ac2fa;
+    border-radius: 10px;
+    padding: 10px 15px;
+    width: 80%;
+    display: block;
+    margin: 0 auto;
+}
+
+.loan_req_contact {
+    position: relative;
+    display: flex;
+    display: -webkit-box;
+    align-items: center;
+    -webkit-box-align: center;
+    padding: 5px;
+    border-bottom: 1px solid #e1e1e1;
+    line-height: 32px;
+    border-top: 1px solid #e1e1e1;
+}
+
+.support_contact_num {
+    padding-left: 15px;
+    display: block;
+    text-decoration: none;
+    color: #888888;
+}
+
+.support_contact_tel {
+    background: url("../img/support-tel-gray.png");
+}
+
+.support_contact_left_logo {
+    background-size: 20px 20px;
+    background-position: 0px 0px;
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    position: relative;
+    top: 3px;
+}
+
+.margin-t-10{
+    margin-top: 10px;
+}
+
+.loan_req_reject{
+    padding: 10px 20px;
+    line-height: 20px;
+    font-size: 14px;
+}
+
+.class_warn{
+    color: #f76046;
+}

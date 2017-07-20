@@ -1,0 +1,127 @@
+body {
+    background-color: #eeeeee;
+}
+
+.support_header {
+    text-align: center;
+    background: linear-gradient(70deg, #66ccff, #36a2eb);
+    padding: 20px 0px;
+}
+
+.support_avatar_img{
+    width: 50px;
+    background-color: #fff;
+    border-radius: 50px;
+}
+
+.support_title{
+    color: #fff;
+    padding-top: 10px;
+}
+
+.support_advice{
+    text-align: center;
+    padding: 10px 0px;
+}
+
+.support_advice_btn{
+    width: 80%;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    padding: 5px 10px;
+    display: block;
+    font-size: 16px;
+    background: #5ac2fa;
+    margin: 0 auto;
+}
+
+.support_advice_area{
+    width: 80%;
+    margin: 10px auto;
+    border: 1px solid #d1d1d1;
+    font-size: 14px;
+}
+
+.support_contact ul li{
+    position: relative;
+    display: flex;
+    display: -webkit-box;
+    align-items: center;
+    -webkit-box-align: center;
+    padding: 5px;
+    border-bottom: 1px solid #e1e1e1;
+    line-height: 32px;
+}
+
+.support_contact_num{
+    padding-left: 15px;
+    display: block;
+    text-decoration: none;
+    color: #888888;
+}
+
+.support_contact_logo{
+    padding-right: 15px;
+}
+
+
+.support_contact_tel{
+    background: url(../img/support-tel-gray.png);
+
+}
+
+.support_contact_tel_a{
+    background: url(../img/support-tel.png);
+
+}
+
+.support_contact_email{
+    background: url(../img/support-email-gray.png);
+
+}
+
+.support_contact_email_a{
+    background: url(../img/support-email.png);
+
+}
+
+.support_contact_addr{
+    background: url(../img/support-address-gray.png);
+
+}
+
+.support_contact_addr_a{
+    background: url(../img/support-address.png);
+
+}
+
+.support_contact_left_logo{
+    background-size: 20px 20px;
+    background-position: 0px 0px;
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    position: relative;
+    top: 3px;
+}
+
+.support_contact_right_logo{
+    background-repeat: no-repeat;
+    background-size: 30px 30px;
+    background-position: 3px 3px;
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+    border: 2px solid #5ac2fa;
+    border-radius: 30px;
+    padding: 5px;
+}
+
+.support_contact_num span{
+    padding-left: 10px;
+}
+
+.support_apply,.support_contact_b,.support_advice_b{
+    margin-top: 10px;
+}

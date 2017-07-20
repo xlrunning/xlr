@@ -1,0 +1,43 @@
+<div class="vehicle-float" v-show="isFloat" style="display: none">
+    <div class="vehicle-pay-qrcode">
+        <div class="vehicle-float-close" @click="closeFloat"></div>
+        <div class="vehicle-float-title">
+            {#<img src="{{ asset("app/img/alipay-q.png") }}" alt="" class="float-img-pay">#}
+            <img  :src="payWayLogoUrl" alt="" class="float-img-pay">
+            <span class="vehicle-float-title-span">${ payWay }</span>
+        </div>
+        <div class="pay-page" style="text-align: center;">
+            <div class="vehicle-float-qrcode">
+                <div class="loader-inner ball-pulse" id="loader-css">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
+            <div class="vehicle-float-store">
+                <span class="vehicle-float-store-span">收款方：{{ vehicle.dealer.mart.name }}-{{ vehicle.dealer.name }}</span>
+            </div>
+            <div class="vehicle-float-price">
+                <span class="vehicle-float-price-tag">¥</span><span class="vehicle-float-price-span">${ orderPrice | formatMoney }</span>
+            </div>
+        </div>
+        <div class="check-ok" style="display: none">
+            <div class="pay-success">
+                <span class="check-ok-img"></span>
+                <span class="check-ok-span">恭喜您，支付成功！</span>
+            </div>
+            <div class="pay-dealer">
+                收款方：{{ vehicle.dealer.mart.name }}-{{ vehicle.dealer.name }}
+            </div>
+            <div class="check-ok-btn-loc">
+                <button onclick="location.reload()" class="check-ok-btn">确认返回</button>
+            </div>
+        </div>
+        <div class="vehicle-float-brand">
+            <span class="vehicle-float-brand-span">©乐行</span>
+        </div>
+    </div>
+</div>
+<div id="none-alert" v-show="isAlert" style="display: none">
+    <p>${ alertMes }</p>
+</div>

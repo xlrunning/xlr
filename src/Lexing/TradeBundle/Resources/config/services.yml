@@ -1,0 +1,21 @@
+services:
+    lexing_trade.trade_manager:
+        class: Lexing\TradeBundle\Service\TradeManager
+        calls:
+            - [setContainer, ["@service_container"]]
+
+    lexing_trade.trade_handler_manager:
+        class: Lexing\TradeBundle\Handler\TradeHandlerManager
+        calls:
+            - [setContainer, ["@service_container"]]
+        tags:
+            - { name: kernel.event_subscriber }
+
+    lexing_trade.vehicle_sale_handler:
+        class: Lexing\TradeBundle\Handler\TradeVehicleSaleHandler
+        arguments: ["@service_container"]
+
+    lexing_trade.vehicle_sale_transformer:
+        class: Lexing\TradeBundle\Content\Transformer\VehicleSaleTransformer
+        calls:
+            - [setContainer, ["@service_container"]]

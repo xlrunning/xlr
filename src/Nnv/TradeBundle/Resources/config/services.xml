@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <service id="nnv_trade.manager" class="Nnv\TradeBundle\Service\TradeManager">
+            <argument type="service" id="service_container" />
+        </service>
+        <service id="nnv_trade.event_subscriber" class="Nnv\TradeBundle\Doctrine\TradeSubscriber">
+            <argument type="service" id="service_container"/>
+            <tag name="doctrine.event_subscriber" connection="default" />
+        </service>
+    </services>
+    
+</container>

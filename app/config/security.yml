@@ -1,0 +1,154 @@
+# To get started with security, check out the documentation:
+# http://symfony.com/doc/current/security.html
+security:
+
+    encoders:
+        Symfony\Component\Security\Core\User\User: plaintext
+        FOS\UserBundle\Model\UserInterface: sha512
+    
+    role_hierarchy:
+        ROLE_ADMIN:       [ROLE_USER]
+        ROLE_DEALER:      [ROLE_USER]
+        ROLE_MART_ADMIN:  [ROLE_USER]
+
+        ROLE_BACKEND_ACCESSIBLE: [ROLE_USER]
+        # 上下架操作员
+        ROLE_OPERATOR:
+            - ROLE_USER
+            - ROLE_BACKEND_ACCESSIBLE
+            - ROLE_LEXING_DEALER_ADMIN_VEHICLE_DEALER_LIST
+            - ROLE_LEXING_DEALER_ADMIN_VEHICLE_DEALER_VIEW
+            - ROLE_LEXING_VEHICLE_ADMIN_VEHICLE_LIST
+            - ROLE_LEXING_VEHICLE_ADMIN_VEHICLE_VIEW
+            - ROLE_LEXING_VEHICLE_ADMIN_VEHICLE_CREATE
+            - ROLE_LEXING_VEHICLE_ADMIN_VEHICLE_EDIT
+            - ROLE_LEXING_VEHICLE_ADMIN_VEHICLE_DELETE
+
+        # 财务
+        ROLE_ACCOUNTANT:
+            - ROLE_USER
+            - ROLE_BACKEND_ACCESSIBLE
+            - ROLE_LEXING_VEHICLE_ADMIN_VEHICLE_LIST
+            - ROLE_LEXING_VEHICLE_ADMIN_VEHICLE_VIEW
+            - ROLE_LEXING_LOAN_ADMIN_VEHICLE_TO_MORTGAGE_LIST
+            - ROLE_LEXING_LOAN_ADMIN_VEHICLE_TO_MORTGAGE_VIEW
+            - ROLE_LEXING_LOAN_ADMIN_VEHICLE_TO_REPAY_LIST
+            - ROLE_LEXING_LOAN_ADMIN_VEHICLE_TO_REPAY_VIEW
+            - ROLE_LEXING_LOAN_ADMIN_VEHICLE_MORTGAGE_LIST
+            - ROLE_LEXING_LOAN_ADMIN_VEHICLE_MORTGAGE_CREATE
+            - ROLE_LEXING_LOAN_ADMIN_VEHICLE_MORTGAGE_EDIT
+            - ROLE_LEXING_LOAN_ADMIN_VEHICLE_MORTGAGE_VIEW
+
+        # 出资人
+        ROLE_CONTRIBUTOR:
+            - ROLE_USER
+            - ROLE_BACKEND_ACCESSIBLE
+
+        # 管理人员
+        ROLE_SUPER_ADMIN:
+            - ROLE_USER
+            - ROLE_ADMIN
+            - ROLE_OPERATOR
+            - ROLE_ACCOUNTANT
+            - ROLE_CONTRIBUTOR
+            - ROLE_SONATA_ADMIN
+            - ROLE_ALLOWED_TO_SWITCH
+
+    access_decision_manager:
+        strategy: unanimous
+    
+    providers:
+        chain_provider:
+            chain: 
+                providers: [in_memory, lexing_bundle]
+#        main:
+#            entity: { class: Nnv\WordpressBundle\Entity\User, property: login }
+        in_memory:
+            memory:
+                users:
+                    admin: { password: zhangyang, roles: [ 'ROLE_SUPER_ADMIN' ] }
+                
+        lexing_bundle:
+            id: fos_user.user_provider.username_email
+
+    firewalls:
+        # disables authentication for assets and the profiler, adapt it according to your needs
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+            
+        admin:
+            context: lexing
+            pattern: ^/(admin|assist)/
+            provider: chain_provider
+            anonymous: ~
+            form_login:
+                check_path: /admin/login_check
+                login_path: /admin/login
+                default_target_path: /admin/dashboard
+            logout:
+                path:   /admin/logout
+                target: /admin/login
+            # access_denied_url: /unauthorized
+            remember_me:
+                secret:   this_is_secret_ingredient_from_lexing
+                lifetime: 2592000 # 30days
+                path:     /
+                domain:   ~
+                
+        mart:
+            context: lexing
+            pattern: ^/mart-admin/
+            provider: lexing_bundle
+            form_login:
+                # always_use_default_target_path: true
+                check_path: /mart-admin/login_check
+                login_path: /mart-admin/login
+                default_target_path: /mart-admin/index
+            logout:
+                path: /mart-admin/logout
+                target: /mart-admin/login
+            anonymous: true
+            #access_denied_url: /station-admin/unauthorized
+            remember_me:
+                secret:   this_is_secret_ingredient_from_sofashion
+                lifetime: 2592000 # 30days
+                path:     /mart-admin
+                domain:   ~ # Defaults to the current domain from $_SERVER
+
+#        api:
+#            context: lexig
+#            pattern: ^/api/
+#            anonymous: true
+#            guard:
+#                authenticators:
+#                    - lexing_device.wpos_token_authenticator
+        # or just app? api and app
+        main:
+            anonymous: ~
+            context: lexing
+            guard:
+                authenticators:
+                    - lexing_device.uuid_token_authenticator
+            # activate different ways to authenticate
+
+            # http_basic: ~
+            # http://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
+
+            # form_login: ~
+            # http://symfony.com/doc/current/cookbook/security/form_login_setup.html
+            
+    access_control:
+        - { path: ^/admin/login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin/login_check/, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        
+        - { path: ^/admin/, role: ROLE_BACKEND_ACCESSIBLE }
+        - { path: ^/assist/deploy/onpush, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/assist/, role: ROLE_ADMIN }
+
+        - { path: ^/login, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/login_check, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        
+        - { path: ^/mart-admin/login, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/mart-admin/logout, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/mart-admin/, role: ROLE_MART_ADMIN }

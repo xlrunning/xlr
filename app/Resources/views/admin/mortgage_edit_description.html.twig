@@ -1,0 +1,69 @@
+<style>
+    .gallery-preview img { height: 80px; margin-right: 10px; }
+</style>
+<script src="{{ asset('js/blazy.min.js') }}"></script>
+{% if vehicle %}
+<div class="alert alert-info">
+    <h4>车辆信息</h4>
+    <ul>
+        <li>车商：<strong>{{ vehicle.dealer }}</strong></li>
+        {# 当前可用额度 #}
+        <li>车型：<strong>{{ vehicle.model }}</strong></li>
+    </ul>
+</div>
+{% endif %}
+
+{% if isMortgage %}
+    <div class="alert alert-warning">
+        <h4>借款信息提示</h4>
+        <ul>
+            <li>当前可用额度：<strong>{{ vehicle.dealer.availableCreditIn10K }}万元</strong></li>
+            <li>预计还款利息：<strong id="amount-to-repay">请选择贷款产品！</strong></li>
+        </ul>
+    </div>
+{% endif %}
+
+{% if isRepay or mortgage.loanRemarkIdentifier %}
+<div class="alert alert-warning">
+    <h4>借款备注ID：<strong>{{ mortgage.loanRemarkIdentifier }}</strong></h4>
+    <ul>
+        <li>借款（万元）：<strong>{{ mortgage.amountIn10K }}</strong></li>
+        <li>借款时间：<strong>{{ mortgage.createdAt|date }}</strong></li>
+    </ul>
+</div>
+
+<div class="alert alert-success">
+    <h4>贷款产品</h4>
+    <ul>
+        {% if loanProduct.fixed == true %}
+            <li>贷款类型：<strong>定期</strong></li>
+            <li>贷款期限：<strong>{{ loanProduct.periodByMonth }}个月</strong></li>
+        {% else %}
+            <li>贷款类型：<strong>随借随还</strong></li>
+            <li>最低起贷时长：<strong>{{ loanProduct.nonFixedStartingDays }}天</strong></li>
+            <li>还款期限：<strong>{{ loanProduct.periodByMonth }}个月内还清</strong></li>
+        {% endif %}
+        {# 当前可用额度 #}
+        <li>年利率：<strong>{{ loanProduct.interestPercentageByYear }}%</strong></li>
+    </ul>
+</div>
+{% endif %}
+
+{% if mortgage.repaid %}
+<div class="alert alert-danger">
+    <h4>还款银行交易号：<strong>{{ mortgage.repaymentTransNo }}</strong></h4>
+    <ul>
+        <li>还款时间：<strong>{{ mortgage.repaidAt|date('Y-m-d H:i:s') }}</strong></li>
+        <li>还款金额：<strong>{{ mortgage.repaidAmount }}</strong></li>
+    </ul>
+</div>
+{% endif %}
+<script>
+    $(function(){
+        new Blazy();
+        $('.link-gallery-manage').click(function(){
+            if($(this).find('span.notice').length == 0)
+                $(this).find('h4').append('<br/><span class="notice text-red" style="font-style:italic;">如已添加或删除照片请刷新本页面查看最新照片</span>');
+        });
+    });
+</script>

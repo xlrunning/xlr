@@ -1,0 +1,172 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="13">
+                <source>eq</source>
+                <target>等于</target>
+            </trans-unit>
+            <trans-unit id="14">
+                <source>neq</source>
+                <target>不等于</target>
+            </trans-unit>
+            <trans-unit id="15">
+                <source>lt</source>
+                <target>小于</target>
+            </trans-unit>
+            <trans-unit id="16">
+                <source>lte</source>
+                <target>不大于</target>
+            </trans-unit>
+            <trans-unit id="17">
+                <source>gt</source>
+                <target>大于</target>
+            </trans-unit>
+            <trans-unit id="18">
+                <source>gte</source>
+                <target>不小于</target>
+            </trans-unit>
+            <trans-unit id="19">
+                <source>req</source>
+                <target>正则表达式</target>
+            </trans-unit>
+            <trans-unit id="20">
+                <source>like</source>
+                <target>包含</target>
+            </trans-unit>
+            <trans-unit id="21">
+                <source>nlike</source>
+                <target>不包含</target>
+            </trans-unit>
+            <trans-unit id="22">
+                <source>rlike</source>
+                <target>开头为</target>
+            </trans-unit>
+            <trans-unit id="23">
+                <source>llike</source>
+                <target>结尾为</target>
+            </trans-unit>
+            <trans-unit id="24">
+                <source>btw</source>
+                <target>之间（不包含边界）</target>
+            </trans-unit>
+            <trans-unit id="25">
+                <source>btwe</source>
+                <target>之间（包含边界）</target>
+            </trans-unit>
+            <trans-unit id="26">
+                <source>isNull</source>
+                <target>没有定义</target>
+            </trans-unit>
+            <trans-unit id="27">
+                <source>isNotNull</source>
+                <target>有定义</target>
+            </trans-unit>
+            <trans-unit id="28">
+                <source>%count% Results, </source>
+                <target>%count% 条结果 |%count% 条结果, </target>
+            </trans-unit>
+            <trans-unit id="29">
+                <source>Search</source>
+                <target>检 索</target>
+            </trans-unit>
+            <trans-unit id="30">
+                <source>Reset</source>
+                <target>清除检索</target>
+            </trans-unit>
+            <trans-unit id="31">
+                <source>Actions</source>
+                <target>操作</target>
+            </trans-unit>
+            <trans-unit id="action.new">
+                <source>action.new</source>
+                <target>新增 %entity_name%</target>
+            </trans-unit>
+            <trans-unit id="action.show">
+                <source>action.show</source>
+                <target>查看</target>
+            </trans-unit>
+            <trans-unit id="action.edit">
+                <source>action.edit</source>
+                <target>编辑</target>
+            </trans-unit>
+            <trans-unit id="action.search">
+                <source>action.search</source>
+                <target>搜索</target>
+            </trans-unit>
+            <trans-unit id="action.delete">
+                <source>action.delete</source>
+                <target>删除</target>
+            </trans-unit>
+            <trans-unit id="action.save">
+                <source>action.save</source>
+                <target>保存</target>
+            </trans-unit>
+            <trans-unit id="action.cancel">
+                <source>action.cancel</source>
+                <target>取消</target>
+            </trans-unit>
+            <trans-unit id="action.list">
+                <source>action.list</source>
+                <target>返回列表</target>
+            </trans-unit>
+            <trans-unit id="sofashion.users">
+                <source>sofashion.users</source>
+                <target>会员</target>
+            </trans-unit>
+    <!-- with symbols -->
+            <!--trans-unit id="26">
+                <source>eqs</source>
+                <target>=</target>
+            </trans-unit>
+            <trans-unit id="27">
+                <source>neqs</source>
+                <target>≠</target>
+            </trans-unit>
+            <trans-unit id="28">
+                <source>lts</source>
+                <target>&lt;</target>
+            </trans-unit>
+            <trans-unit id="29">
+                <source>ltes</source>
+                <target>≤</target>
+            </trans-unit>
+            <trans-unit id="30">
+                <source>gts</source>
+                <target>&gt;</target>
+            </trans-unit>
+            <trans-unit id="31">
+                <source>gtes</source>
+                <target>≥</target>
+            </trans-unit>
+            <trans-unit id="32">
+                <source>reqs</source>
+                <target>^x$</target>
+            </trans-unit>
+            <trans-unit id="33">
+                <source>likes</source>
+                <target>(x)</target>
+            </trans-unit>
+            <trans-unit id="34">
+                <source>nlikes</source>
+                <target>()x</target>
+            </trans-unit>
+            <trans-unit id="35">
+                <source>rlikes</source>
+                <target>x*</target>
+            </trans-unit>
+            <trans-unit id="36">
+                <source>llikes</source>
+                <target>*x</target>
+            </trans-unit>
+            <trans-unit id="37">
+                <source>btws</source>
+                <target>&lt;x&lt;</target>
+            </trans-unit>
+            <trans-unit id="38">
+                <source>btwes</source>
+                <target>&lt;=x&lt;<=/target>
+            </trans-unit-->
+        </body>
+    </file>
+</xliff>

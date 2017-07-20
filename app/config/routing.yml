@@ -1,0 +1,108 @@
+lexing_imported_car:
+    resource: "@LexingImportedCarBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+lexing_loan:
+    resource: "@LexingLoanBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+lexing_device:
+    resource: "@LexingDeviceBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+lexing_payment:
+    resource: "@LexingPaymentBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+lexing_trade:
+    resource: "@LexingTradeBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+lexing_souche:
+    resource: "@LexingSouCheBundle/Controller/"
+
+lexing_workflow:
+    resource: "@LexingWorkflowBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+lexing_site:
+    resource: "@LexingSiteBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+lexing_assist:
+    resource: "@LexingAssistBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+lexing_xin:
+    resource: "@LexingXinBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+lexing_vehicle:
+    resource: "@LexingVehicleBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+lexing_dealer:
+    resource: "@LexingDealerBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+lexing_mart:
+    resource: "@LexingMartBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+lexing_user:
+    resource: "@LexingUserBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
+admin_area:
+    resource: "@SonataAdminBundle/Resources/config/routing/sonata_admin.xml"
+    prefix: /admin
+    
+admin_login:
+    path: /admin/login
+    defaults: { _controller: FOSUserBundle:Security:login }
+    
+admin_check:
+    path:  /admin/login_check
+    defaults: { _controller: FOSUserBundle:Security:check }
+
+admin_logout:
+    path:  /admin/logout
+    defaults: { _controller: FOSUserBundle:Security:logout }
+    
+mart_login:
+    path: /mart-admin/login
+    defaults: { _controller: FOSUserBundle:Security:login, mart_admin_login: 1 }
+
+mart_check:
+    path:  /mart-admin/login_check
+    defaults: { _controller: FOSUserBundle:Security:check }
+
+mart_logout:
+    path:  /mart-admin/logout
+    defaults: { _controller: FOSUserBundle:Security:logout }
+    
+_sonata_admin:
+    resource: .
+    type: sonata_admin
+    prefix: /admin
+    
+_nnv:
+    resource: nnv_routing.yml
+    prefix: /nnv
+

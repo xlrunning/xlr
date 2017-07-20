@@ -1,0 +1,36 @@
+{% extends 'mart_admin/base_noJquery.html.twig' %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('themes/roosa/plugins/morris/morris.css') }}">
+{% endblock %}
+{% block content %}
+    <div class="container-fluid">
+        <!-- Begin Panel -->
+        <div class="panel panel-plain panel-rounded">
+            <div class="panel-heading">
+                <h3 class="panel-title">控制面板</h3>
+                <p class="subtitle text-uppercase m-t-xs">财务数据报表</p>
+                <!-- Begin Panel Toolbar -->
+                <div class="panel-toolbar v-centered">
+                    <ul class="list-inline m-a-0">
+                        <li><i class="rs-collapse-panel icon-toolbar-rotate icon-toolbar gcon gcon-chevron-up"></i></li>
+                        <li><i class="rs-refresh-panel icon-toolbar gcon gcon-cycle"></i></li>
+                        <li><i class="rs-close-panel icon-toolbar gcon gcon-cross"></i></li>
+                    </ul>
+                </div><!-- /.panel-toolbar -->
+                <!-- End Panel Toolbar -->
+            </div><!-- /.panel-heading -->
+            <div class="panel-body">
+                <h4 class="text-center m-b-lg">Q1财务数据报表</h4>
+                <div id="morris-hero-area" style="width: 100%; height: 300px;"></div>
+            </div><!-- .panel-body -->
+        </div><!-- /.panel -->
+        <!-- End Panel -->
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <!-- Page Plugins -->
+    <script src="{{ asset('themes/roosa/js/vendor/raphael.js') }}"></script>
+    <script src="{{ asset('themes/roosa/plugins/morris/morris.min.js') }}"></script>
+    <script src="{{ asset('themes/roosa/plugins/morris/morris-exam.js') }}"></script>
+{% endblock %}

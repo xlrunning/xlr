@@ -1,0 +1,22 @@
+services:
+#    lexing_mart.example:
+#        class: Lexing\MartBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]
+    lexing_mart.admin.vehicle_mart:
+        class: Lexing\MartBundle\Admin\VehicleMartAdmin
+        arguments: [~, Lexing\MartBundle\Entity\VehicleMart, SonataAdminBundle:CRUD]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: 车城, label: 车城 }
+            
+    lexing_mart.security_listener:
+        class: Lexing\MartBundle\EventListener\SecurityListener
+        arguments: ["@service_container"]
+        tags:
+            - { name: kernel.event_listener, event: security.interactive_login, method: onSecurityInteractiveLogin }
+
+    lexing_mart.action_listener:
+        class: Lexing\MartBundle\EventListener\MartListener
+        calls:
+            - [setContainer, ["@service_container"]]
+        tags:
+            - { name: kernel.event_listener, event: kernel.controller, method: onKernelController }

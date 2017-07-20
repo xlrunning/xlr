@@ -1,0 +1,39 @@
+{% stylesheets
+'@NnvGalleryBundle/Resources/public/lightbox2/css/lightbox.css'
+%}
+<link rel="stylesheet" href="{{ asset_url }}" />
+{% endstylesheets %}
+<style>
+    .gallery-wrapper { margin-left: 10px; }
+    h4 span { font-size: 14px; }
+    .gallery-preview img { height: 100px; margin-right: 10px; }
+    th span { font-size: 12px; }
+</style>
+<script src="{{ asset('js/blazy.min.js') }}"></script>
+{% javascripts
+'@NnvGalleryBundle/Resources/public/lightbox2/js/lightbox.min.js'
+%}
+<script src="{{ asset_url }}"></script>
+{% endjavascripts %}
+{% set gallery = object.galleries['vehicle.content'] is defined ? object.galleries['vehicle.content'] : null %}
+{% if gallery and gallery.nbItems != 0 %}
+    <tr>
+        <th>图片<br/><span>(点击图片查看大图)</span></th>
+        <td>
+            <div class="gallery-wrapper">
+                <div class="gallery-preview">
+                    {% for item in gallery.items %}
+                        <a class="" data-lightbox="gallery" data-title="{{ item.metaContent }}" href="{{ asset('uploads/gallery/' ~ item.pic) }}">
+                            <img class="b-lazy" title="{{ item.metaContent }}" data-src="{{ asset('uploads/gallery/' ~ item.pic) }}" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" />
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </td>
+    </tr>
+{% endif %}
+<script>
+    $(function(){
+        new Blazy();
+    });
+</script>

@@ -1,0 +1,87 @@
+<aside class="rs-sidebar">
+    <!-- Sidebar menu -->
+    <ul class="rs-sidebar-nav default-sidebar-nav" id="rs-siderbar-nav">
+        <input type="hidden" id="now_url" value="{{ app.request.get('_route') }}">
+        <li class="rs-user-sidebar">
+            <a href="javascript:void(0);">
+                <img src="{{ asset('themes/images/avatars/01.png') }}" alt="Avatar" class="avatar img-circle">
+                {{ app.user.username }}
+                <span class="subname text-uppercase m-t">Any short info</span>
+            </a>
+        </li>
+
+        <li class="menu-block-divider"></li>
+        <li class="menu-header">{{ _mart|default("车城") }}管理菜单</li>
+
+        <li class="dealer">
+            <a href="javascript:void(0);">
+                <span class="gcon gcon-shop rs-icon-menu"></span>车商管理
+            </a>
+            <ul>
+                <li class="mart_admin_dealer_list"><a href="{{ path('mart_admin_dealer_list') }}">车商列表</a></li>
+                <li class="mart_admin_dealer_add"><a href="{{ path('mart_admin_dealer_add') }}">车商添加</a>
+                </li>
+            </ul>
+        </li>
+        <li class="vehicle">
+            <a href="javascript:void(0);">
+                <span class="gcon gcon-flow-tree rs-icon-menu"></span>车辆管理
+            </a>
+            <ul>
+                <li class="mart_admin_vehicle_list"><a href="{{ path('mart_admin_vehicle_list') }}">车辆列表</a></li>
+                <li class="mart_admin_vehicle_add"><a href="{{ path('mart_admin_vehicle_add') }}">车辆添加</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="javascript:void(0);">
+                <span class="gcon gcon-users rs-icon-menu"></span>员工管理
+            </a>
+            <ul>
+                <li><a href="javascript:void(0);">01. Sub Menu</a></li>
+                <li><a href="javascript:void(0);">01. Sub Menu</a>
+                    <ul>
+                        <li><a href="javascript:void(0);">02. Sub Submenu</a></li>
+                        <li><a href="javascript:void(0);">02. Sub Submenu</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="javascript:void(0);">
+                <span class="gcon gcon-credit rs-icon-menu"></span>财务管理
+            </a>
+            <ul>
+                <li><a href="javascript:void(0);">01. Sub Menu</a></li>
+                <li><a href="javascript:void(0);">01. Sub Menu</a>
+                    <ul>
+                        <li><a href="javascript:void(0);">02. Sub Submenu</a></li>
+                        <li><a href="javascript:void(0);">02. Sub Submenu</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="javascript:void(0);">
+                <span class="gcon gcon-lock rs-icon-menu"></span>账号管理
+            </a>
+            <ul>
+                <li><a href="javascript:void(0);">个人资料</a></li>
+                <li><a href="javascript:void(0);">修改密码</a></li>
+            </ul>
+        </li>
+
+        <li class="menu-block-divider"></li>
+        <li class="menu-header">menu header</li>
+
+        <li class="no-icon-menu">
+            <a href="javascript:void(0);">No icon menu</a>
+        </li>
+        <li class="no-icon-menu">
+            <a href="javascript:void(0);">Another menu</a>
+        </li>
+
+        <li class="menu-block-divider"></li>
+    </ul>
+    <!-- End sidebar menu -->
+
+</aside>

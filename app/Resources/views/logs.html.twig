@@ -1,0 +1,19 @@
+{#{% if is_granted('ROLE_ADMIN') %}#}
+{% for log in logEntries %}
+    <div>{{ log.loggedAt|date('m-d H:i') }}：
+        {% set logRendered = log_render(log) %}
+        <a target='_blank' href="{% if is_granted('ROLE_SUPER_ADMIN') and log.user %}{{ path('admin_lexing_user_user_edit', {'id':log.user.id}) }}{% else %}#{% endif %}">{{  log.user }}</a>
+        {% if logRendered %}
+            {{ logRendered|raw }}
+        {% else %}
+            {{ log.action|trans({}, "logs") }}了
+            {{ log.objectClass|trans({}, "logs") }}
+            {% if log.object %}
+                <a href="{% if routes[log.objectClass] is defined %}{{ path(routes[log.objectClass], {id:log.objectId}) }}{% else %}#{% endif %}">
+                    {{ log.object }}
+                </a>
+            {% endif %}
+        {% endif %}
+    </div>
+{% endfor %}
+{#{% endif %}#}

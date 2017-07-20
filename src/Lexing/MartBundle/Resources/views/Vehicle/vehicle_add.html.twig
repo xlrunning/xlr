@@ -1,0 +1,238 @@
+{% extends 'mart_admin/base.html.twig' %}
+{% block stylesheets %}
+    <style>
+        .row .title {
+            color: #666;
+            height: 40px;
+            line-height: 40px;
+        }
+        .margin-top-15{
+            margin-top: 15px;
+        }
+    </style>
+    <link rel="stylesheet" href="{{ asset("/themes/roosa/plugins/selectize/css/selectize.min.css") }}">
+    <link rel="stylesheet" href="{{ asset("/themes/roosa/plugins/datepicker/css/datepicker.min.css") }}">
+{% endblock %}
+{% block content %}
+    <div class="container-fluid">
+        <!-- Begin Panel -->
+        <div class="panel panel-plain panel-rounded">
+            <div class="panel-heading">
+                <h3 class="panel-title">车量添加</h3>
+                <!-- Begin Panel Toolbar -->
+                <div class="panel-toolbar">
+                    <ul class="list-inline m-a-0">
+                        <li><i class="rs-collapse-panel icon-toolbar-rotate icon-toolbar gcon gcon-chevron-up"></i></li>
+                        <li><i class="rs-close-panel icon-toolbar gcon gcon-cross"></i></li>
+                    </ul>
+                </div><!-- /.panel-toolbar -->
+                <!-- End Panel Toolbar -->
+            </div><!-- /.panel-heading -->
+            <div class="panel-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-2 title">
+                            车辆联系人
+                        </div>
+                        <div class="col-md-10">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="联系人姓名">
+                            </div><!-- /.form-group -->
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2 title">
+                            出售城市
+                        </div>
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <select class="rs-selectize-single">
+                                    <option value="">北京</option>
+                                    <option>安徽</option>
+                                    <option>重庆</option>
+                                    <option>福建</option>
+                                    <option>甘肃</option>
+                                    <option>广东</option>
+                                    <option>广西</option>
+                                    <option>贵州</option>
+                                    <option>海南</option>
+                                    <option>河北</option>
+                                    <option>黑龙江</option>
+                                    <option>河南</option>
+                                    <option>湖北</option>
+                                    <option>湖南</option>
+                                    <option>江苏</option>
+                                    <option>江西</option>
+                                    <option>吉林</option>
+                                    <option>辽宁</option>
+                                    <option>内蒙古</option>
+                                    <option>宁夏</option>
+                                    <option>青海</option>
+                                    <option>陕西</option>
+                                    <option>山东</option>
+                                    <option>上海</option>
+                                    <option>山西</option>
+                                    <option>四川</option>
+                                    <option>天津</option>
+                                    <option>新疆</option>
+                                    <option>云南</option>
+                                    <option>浙江</option>
+                                </select>
+                            </div><!-- /.form-group -->
+                        </div>
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <select class="rs-selectize-single">
+                                    <option value="3">北京</option>
+                                    <option value="5">广州</option>
+                                </select>
+                            </div><!-- /.form-group -->
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2 title">
+                            选择车型
+                        </div>
+                        <div class="col-md-3">
+                            <select class="form-control">
+                                <option selected>车型</option>
+                                <option value="5">安驰</option>
+                                <option value="62">奥迪</option>
+                                <option value="68">阿斯顿·马丁</option>
+                                <option value="141">AC Schnitzer</option>
+                                <option value="175">阿尔法罗密欧</option>
+                                <option value="251">安凯客车</option>
+                                <option value="259">ALPINA</option>
+                                <option value="4">巴博斯</option>
+                                <option value="6">宝龙</option>
+                                <option value="22">保时捷</option>
+                                <option value="34">别克</option>
+                                <option value="38">宝马</option>
+                                <option value="47">奔驰</option>
+                                <option value="58">北汽制造</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <select class="form-control">
+                                <option selected>车系</option>
+                                <option value="4">200</option>
+                                <option value="174">100</option>
+                                <option value="267">A4</option>
+                                <option value="269">A6L</option>
+                                <option value="621">A4L</option>
+                                <option value="685">Q7</option>
+                                <option value="687">A3两厢五门版</option>
+                                <option value="688">A4三厢</option>
+                                <option value="689">A6三厢</option>
+                                <option value="690">A8</option>
+                                <option value="693">TT</option>
+                                <option value="1116">Q5</option>
+                                <option value="1676">A5-Coupe</option>
+                                <option value="1677">R8</option>
+                                <option value="1919">Q5</option>
+                                <option value="1975">A6</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <select class="form-control">
+                                <option value="0">车型</option>
+                                <option value="90006264">2016款 2.0T 自动 欧规版</option>
+                                <option value="90004909">2016款 3.0T 自动 欧规版</option>
+                                <option value="90001713">2016款 3.0T 自动 45TFSI S-Line尊贵型</option>
+                                <option value="90001622">2016款 3.0T 自动 45TFSI尊贵型</option>
+                                <option value="90001621">2016款 3.0T 自动 45TFSI S-Line运动型</option>
+                                <option value="90001620">2016款 3.0T 自动 45TFSI技术型</option>
+                                <option value="90001619">2016款 2.0T 自动 40TFSI S-Line运动型</option>
+                                <option value="90001618">2016款 2.0T 自动 40TFSI舒适型</option>
+                                <option value="150509">2015款 3.0T 自动 40TFSI尊藏版</option>
+                                <option value="150508">2015款 3.0T 自动 40TFSI典藏版</option>
+                                <option value="150507">2015款 3.0T 自动 35TDI卓越版 柴油</option>
+                                <option value="150506">2015款 3.0T 自动 35TFSI运动型</option>
+                                <option value="150505">2015款 3.0T 自动 35TFSI进取型</option>
+                                <option value="90004908">2014款 3.0T 自动 美规版</option>
+                                <option value="90004907">2014款 3.0T 自动 中东版</option>
+                                <option value="90003531">2014款 3.0T 自动 40TFSI专享型</option>
+                                <option value="90003530">2014款 3.0T 自动 35TDI专享型 柴油</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row margin-top-15">
+                        <div class="col-md-2 title">
+                            选择车型
+                        </div>
+                        <div class="col-md-8">
+                            <input type="text" class="form-control" placeholder="请填写行驶里程">
+                        </div>
+                        <div class="col-md-2 title">万公里</div>
+                    </div>
+                    <div class="row margin-top-15">
+                        <div class="col-md-2 title">
+                            车牌号码
+                        </div>
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" placeholder="如：粤A12345">
+                        </div>
+                    </div>
+                    <div class="row margin-top-15">
+                        <div class="col-md-2 title">
+                            出产日期
+                        </div>
+                        <div class="col-md-10">
+                            <div class="form-group">
+                                <input type="text" class="form-control rs-datepicker" data-date-format="mm-dd-yyyy" placeholder="汽车出产日期">
+                            </div><!-- /.form-group -->
+                        </div>
+                    </div>
+                    <div class="row margin-top-15">
+                        <div class="col-md-2 title">
+                            首次上牌时间
+                        </div>
+                        <div class="col-md-10">
+                            <div class="form-group">
+                                <input type="text" class="form-control rs-datepicker" data-date-format="mm-dd-yyyy" placeholder="首次上牌时间">
+                            </div><!-- /.form-group -->
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2 title">
+                            车辆VIN码
+                        </div>
+                        <div class="col-md-10">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="VIN码">
+                            </div><!-- /.form-group -->
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2 title">
+                            车辆报价
+                        </div>
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="车辆报价">
+                            </div><!-- /.form-group -->
+                        </div>
+                        <div class="col-md-2 title">万元</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 col-md-offset-4">
+                            <button class="btn btn-danger btn-block m-b">增加车辆<span class="fa fa-automobile icon-btn m-l"></span></button>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- .panel-body -->
+        </div><!-- /.panel -->
+        <!-- End Panel -->
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('/themes/roosa/plugins/datatable/datatables.min.js') }}"></script>
+    <script src="{{ asset('/themes/roosa/plugins/datatable/datatables-example.js') }}"></script>
+    <script src="{{ asset('/themes/roosa/plugins/selectize/js/standalone/selectize.min.js') }}"></script>
+    <script src="{{ asset('/themes/roosa/plugins/selectize/selectize-example.js') }}"></script>
+    <script src="{{ asset('/themes/roosa/plugins/datepicker/js/bootstrap-datepicker.js') }}"></script>
+    <script src="{{ asset('/themes/roosa/plugins/datepicker/datepicker-example.js') }}"></script>
+
+{% endblock %}

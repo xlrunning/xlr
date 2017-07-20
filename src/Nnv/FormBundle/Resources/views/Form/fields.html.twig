@@ -1,0 +1,171 @@
+{% block mobile_widget %}
+    {% spaceless %}
+        <input class="form-control" type="tel" maxlength="11" minlength="11" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+    {% endspaceless %}
+{% endblock mobile_widget %}
+
+{% block image_file_widget %}
+    {% spaceless %}
+        <input onchange="$(this).parent().find('.form-field-image').hide();" type="file" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+        
+        {% if image is not null %}
+        <div class="form-field-image-wrapper" style="margin-top:8px;">
+            <img class="form-field-image" style="max-width:{{ maxw }}px; max-height:{{ maxh }}px;" src="{{ image }}" />
+        </div>
+        {% endif %}
+    {% endspaceless %}
+{% endblock image_file_widget %}
+
+{% block image_link_widget %}
+    {% spaceless %}
+        <input type="text" class="form-control" {{ block('widget_attributes') }} {% if value is not empty %}value="{{ value }}" {% endif %}/>
+        
+        {% if value is not null %}
+        <div class="form-field-image-wrapper" style="margin-top:8px;">
+            <img class="form-field-image" style="max-width:200px; max-height:200px;" src="{{ value }}" />
+        </div>
+        {% endif %}
+    {% endspaceless %}
+{% endblock image_link_widget %}
+
+{% block link_widget %}
+    {% spaceless %}
+        <a target="_blank" id="btn-{{ id }}" class="btn-ajaxedit" href="{{ value }}">{{ label }}</a>
+        {#
+        <script>
+        $('#btn-{{ id }}').click(function(e){
+            e.preventDefault();
+            
+            $.ajax({
+                url: $(this).attr('href'),
+                success: function(rsp) {
+                    var jdlg = $('#formdlg').html(rsp).dialog({modal:true, width: 600});
+                    jdlg.dialog('open');
+                    
+                    $('#formdlg form').submit(function(e){
+                        e.preventDefault();
+                        
+                        var formData = new FormData($(this).get(0));
+                        var action = $(this).attr('action');
+                        $.ajax({
+                            type: 'POST',
+                            url: action + '&justoptions=1',
+                            data: formData,
+                            cache: false,
+                            contentType: false,
+                            processData: false,
+                            success: function(rsp2){
+                                if (rsp2.result == 'ok') {
+                                    alert('更新成功');
+                                    jdlg.dialog('close');
+                                }
+                            }
+                        });
+                    });
+                }
+            });
+        });
+        </script>
+        #}
+    {% endspaceless %}
+{% endblock link_widget %}
+
+{% block choice_input_widget %}
+    {% spaceless %}
+    <div id="{{ id }}-wrapper" class="input-group">
+        {% if choices is not empty %}
+        <div class="input-group-btn">
+            <button data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button" aria-expanded="true">选择 <span class="caret"></span></button>
+            <ul class="dropdown-menu">
+                {% for choice in choices %}
+                <li><a href="#" class="inp-help-sel">{{ choice }}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+        {{ form_widget(form) }}
+        <script>
+        $('#{{ id }}-wrapper a.inp-help-sel').on('click', function(e){
+            e.preventDefault();
+            $(this).closest('.input-group').find('input[type=text]').val($(this).text());
+        });
+        </script>
+    </div>
+    {% endspaceless %}
+{% endblock choice_input_widget %}
+
+{% block linked_choice_widget %}
+    {% spaceless %}
+        {% set multiple, choice_translation_domain = false, null %}
+        {# 如果初始化了choices，这里有值也不会selected，因为selectedchoice是===，而id如果没有viewtransformer会自动转化为string #}
+        {{- block('choice_widget_collapsed') -}}
+        <script>
+            $(function(){
+                {# select2 3.* 非4.0 #}
+                var populate_{{ id }} = function(){
+                    var linkedToEl = $('#{{ form.parent.vars.id ~ '_' ~ populate_from }}');
+
+                    if (linkedToEl.length == 0) {
+                        linkedToEl = $('#{{ form.parent.vars.id  }}').find('[populate-to="{{ populate_from }}"]');
+                    }
+
+                    var emptyOpts  = $('#{{ id }}').html();
+                    var populate_{{ id }}_from = function(val, selected){
+                        selected = selected || '';
+                        var currentSelect2El = $('#{{ id }}');
+                        var option = linkedToEl.find(':selected');
+                        var fromVal = option.attr('data-id') != undefined ? option.attr('data-id') : val;
+                        if(fromVal == '') {
+                            currentSelect2El.html(emptyOpts).val('').trigger('change');
+                            return;
+                        }
+
+                        currentSelect2El.select2('enable', false);
+                        currentSelect2El.html('<option value="">加载中...</option>').val('').trigger('change');
+                        var label = $.trim($('label[for="{{ id }}"]').text());
+                        $.get('{{ path(population_endpoint, {from:populate_from, to:populate_to}) }}?from=' + fromVal, function (rsp) {
+                            var opts = '<option value="">选择' + label + '</option>';
+                            var values = [];
+                            $.each(rsp.result, function(key, item) {
+                                if (Array.isArray(item)) {
+                                    opts += '<optgroup label="' + key + '">';
+                                    $.each(item, function(key2, item2) {
+                                        values.push(''+item2.val);
+                                        opts += '<option' + ' value="' + item2.value + '">' + item2.label + '</option>';
+                                    });
+                                    opts += '</optgroup>';
+                                } else {
+                                    values.push(''+item.val);
+                                    opts += '<option ' + ' value="' + item.value + '">' + item.label + '</option>';
+                                }
+                            });
+                            if (selected) {
+                                // something wrong actually?
+                                selected = ''+selected;
+                                selected = $.inArray(selected, values) != -1 ? selected : '';
+                            }
+                            currentSelect2El.html(opts).val(selected).trigger('change', 'init');
+                            currentSelect2El.select2('enable', true);
+                        });
+                    };
+                    {% if not choices %}
+                    if (linkedToEl.val() && linkedToEl.val() != '') {
+                        populate_{{ id }}_from(linkedToEl.val(), '{{ value }}');
+                    }
+                    {% else %}
+                        {# js 选择，使得select2可以format #}
+                        $('#{{ id }}').val('{{ value }}').trigger('change');
+                    {% endif %}
+
+                    // @todo not just change event, to support linking to non-select element
+                    linkedToEl.on('change', function(e, state){
+                        e.preventDefault();
+                        var val = e.val == undefined ? linkedToEl.val() : e.val;
+                        populate_{{ id }}_from(val, state == 'init' ? '{{ value }}' : null);
+                    });
+                }();
+            });
+
+        </script>
+    {% endspaceless %}
+{% endblock linked_choice_widget %}

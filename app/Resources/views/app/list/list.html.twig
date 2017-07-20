@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>库存车辆</title>
+    <link rel="stylesheet" href="{{ asset("app/css/loaders.min.css") }}">
+    <link rel="stylesheet" href="{{ asset("app/css/main.css") }}?v=7">
+    {#<script src="{{ asset("app/js/jquery-1.9.1.js") }}"></script>#}
+    {#<script src="{{ asset("app/js/vue.js") }}"></script>#}
+</head>
+<body>
+<div class="page">
+    <div class="content">
+        <div class="content-header">
+            <header class="header">
+                <input type="text" placeholder="品牌车系／VI／车牌">
+                <button class="search-btn">搜索</button>
+            </header>
+        </div>
+        <div class="filterbar-container">
+            <ul>
+                <li class="active">
+                    品牌
+                    <span class="arrow"></span>
+                </li>
+                <li>状态</li>
+                <li>排序</li>
+                <li>筛选</li>
+            </ul>
+        </div>
+        <div class="car-list" id="cat-list-vue">
+            <ul id="car-ul">
+                {% for i in 1..5 %}
+                    <a href="{{ path("app_vehicle_detail") }}" class="list-li-a">
+                        <li>
+                            <div class="list-item">
+                                <div class="list-item-info">
+                                    <div class="product-img">
+                                        <img src="img/car-img.png" alt="car" class="preview-img">
+                                    </div>
+                                    <div class="product-info">
+                                        <a href="{{ path("app_vehicle_detail") }}" class="title-a">
+                                            <h4>标致2013款 标致307 1.6L 标致 307 KING</h4>
+                                        </a>
+                                        <div class="detail">
+                                            <span>2013年07月</span>
+                                            <span>|</span>
+                                            <span>3.00万公里</span>
+                                        </div>
+                                        <div class="price-block">
+                                            <span class="price-title">网络标价</span>
+                                            <span class="preference-price">6.98万</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tag">
+                                    <button class="tag-btn tag-active">已预付订金</button>
+                                    <button class="tag-btn tag-active">抵押</button>
+                                    <button class="tag-btn ">首付</button>
+                                </div>
+                            </div>
+                        </li>
+                    </a>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+</body>
+</html>

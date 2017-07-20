@@ -1,0 +1,24 @@
+services:
+#    lexing_assist.example:
+#        class: Lexing\AssistBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]
+      lexing.sonata.block.service.assist:
+          class: Lexing\AssistBundle\SonataBlock\AssistBlockService
+          arguments: ["lexing.sonata.block.service.assist", "@templating"]
+          tags:
+              - { name: "sonata.block" }
+
+      lexing.menu_listener:
+          class: Lexing\AssistBundle\EventListener\MenuBuilderListener
+          tags:
+              - { name: kernel.event_listener, event: sonata.admin.event.configure.menu.sidebar, method: addMenuItems }
+
+      lexing_log.twig_extension:
+          class: Lexing\AssistBundle\Twig\LogTwigExtension
+          arguments: ["@service_container"]
+          tags:
+              - { name: "twig.extension" }
+
+      lexing_log.render:
+          class: Lexing\AssistBundle\Service\LogRenderer
+          arguments: ["@service_container"]

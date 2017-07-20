@@ -1,0 +1,57 @@
+{% extends 'endbase.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <h1>旺POS测试收银使用</h1>
+        <div class="payresult">
+
+        </div>
+        <a id="btncashier" href="#" class="btn btn-primary btn-lrg">收 银</a>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        $(function(){
+            function rand(min, max) {
+                return Math.round(Math.random() * (max - min) + min);
+            }
+            window.onCashierBack = function(data){
+//                $('.payresult').html(data);
+
+                var jsonObj = JSON.parse(data);
+
+                var payTypes = {
+                    '1001': '现金',
+                    '1003': '微信',
+                    '1004': '支付宝',
+                    '1006': '银行卡'
+                };
+                // 1001 现金
+                // 1003 微信
+                // 1004 支付宝
+                // 1005 百度钱包
+                // 1006 银行卡
+                // 1007 易付宝
+                // 1009 京东钱包
+                // 1011 QQ钱包
+                /*内容样式为:
+                 {
+                 "errCode": "0",
+                 "errMsg": "支付成功",
+                 "out_trade_no": "1474442791311",
+                 "trade_status": "PAY",
+                 "input_charset": "UTF-8",
+                 "cashier_trade_no": null,
+                 "pay_type": "1006",
+                 "pay_info": "支付成功"
+                 }*/
+                $('.payresult').append('<br/>' + jsonObj.pay_info + '：' + payTypes[jsonObj.pay_type]);
+            };
+            $('#btncashier').click(function(){
+                // String tradeNo, int totalFee, String body, String notifyUrl, String attach
+                android.invokeCashier('LX123456' + rand(99, 9999), rand(1, 3), '测试车辆', '{{ url("lx_pay_testpos_notify") }}', '');
+            });
+        });
+    </script>
+{% endblock %}

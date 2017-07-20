@@ -1,0 +1,11 @@
+
+{% set btns %}
+    <div class="btn-group" role="group">
+        {% for code, config in vehicle_galleries_config %}
+        <a class="btn btn-sm {% if object.galleries[code] is defined and object.galleries[code].nbItems > 0 %}btn-warning{% else %}btn-default{% endif %}" href="{{ path('lx_vehicle_gallery', {code:code, id:object.id}) }}">{{ config.name }}</a>
+        {% endfor %}
+    </div>
+{% endset%}
+    <a role="button" href="{{ path('lx_vehicle_gallery', {code:'vehicle.content', id:object.id}) }}" class="btn btn-sm btn-default">
+        <i class="glyphicon glyphicon-picture"></i>
+    </a>

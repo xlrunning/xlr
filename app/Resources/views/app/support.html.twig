@@ -1,0 +1,97 @@
+{% extends "app/appbase.html.twig" %}
+
+{% block title %}
+    使用帮助
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset("app/css/support.css") }}?v=2">
+{% endblock %}
+
+{% block body %}
+    <div class="page">
+        <div class="support_header">
+            <div class="support_avatar">
+                <img src="{{ asset("app/img/customer-service.png") }}" alt="support" class="support_avatar_img">
+            </div>
+            <div class="support_title">
+                客服中心
+            </div>
+        </div>
+
+        {#联系我们#}
+        <div data-collapse class="common_deposit support_contact_b">
+            <h2>
+                联系我们
+                <img src="/app/img/arrow-right.png" alt="" class="common_arrow_img">
+            </h2>
+            <div class="support_contact">
+                <ul>
+                    <li>
+                        <a href="tel:5888888" class="support_contact_num flex-1 ">
+                            <i class="support_contact_tel support_contact_left_logo"></i>
+                            <span>588-88888</span>
+                        </a>
+                        {#<div class="support_contact_logo ">#}
+                        {#<a href="tel:588-88888" class="support_contact_tel_a support_contact_right_logo"></a>#}
+                        {#</div>#}
+                    </li>
+
+                    <li>
+                        <a href="mailto:support@lexing360.com" class="support_contact_num flex-1 ">
+                            <i class="support_contact_email support_contact_left_logo"></i>
+                            <span>support@lexing360.com</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a class="support_contact_num flex-1 ">
+                            <i class="support_contact_addr support_contact_left_logo"></i>
+                            <span>广州市天河区乐天创意园</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        {#联系我们 end#}
+
+        {#申请贷款#}
+        <div data-collapse class="common_deposit support_apply">
+            <h2 class="">
+                如何申请贷款
+                <img src="/app/img/arrow-right.png" alt="" class="common_arrow_img">
+            </h2>
+            <div class="support_apply_loan support_contact">
+                <ul>
+                    <li>
+                        <div class="support_contact_num flex-1 ">
+                            <i class="support_contact_tel support_contact_left_logo"></i>
+                            <span>588-88888</span>
+                        </div>
+
+                    </li>
+                </ul>
+            </div>
+        </div>
+        {#申请贷款 end#}
+
+        {#反馈#}
+        <div data-collapse class="common_deposit support_advice_b">
+            <h2>
+                反馈建议
+                <img src="/app/img/arrow-right.png" alt="" class="common_arrow_img">
+            </h2>
+            <div class="support_advice">
+                <form action="#" method="POST">
+                    <textarea name="advice" id="" cols="30" rows="6" class="support_advice_area"></textarea>
+                    <button class="support_advice_btn">提交</button>
+                </form>
+            </div>
+        </div>
+        {#反馈 end#}
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset("app/js/jquery.collapse.js") }}"></script>
+{% endblock %}

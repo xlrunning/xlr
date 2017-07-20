@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>车辆详情</title>
+    <link rel="stylesheet" href="{{ asset("app/css/loaders.min.css") }}">
+    <link rel="stylesheet" href="{{ asset("app/css/swiper.min.css") }}">
+    <link rel="stylesheet" href="{{ asset("app/css/app.css") }}?v=3">
+    <link rel="stylesheet" href="{{ asset("app/css/main.css") }}?v=7">
+    <link rel="stylesheet" href="{{ asset("app/css/weui.min.css") }}">
+    <link rel="stylesheet" href="{{ asset("app/css/vehicle.css") }}">
+    {#<script data-pace-options='{ "document": true }' src="{{ asset('app/js/pace.min.js') }}"></script>#}
+    {#<link rel="stylesheet" href="{{ asset("app/css/pace-theme.css") }}?v=1">#}
+    <style>
+        body {
+            background-color: #eeeeee;
+        }
+    </style>
+</head>
+<body>
+<div class="page" id="pay-way-vue">
+    <div class="content">
+        {#<button onclick="test()">test</button>#}
+        {#<header>#}
+        {#<a href="#"><div class="vehicle-title">车辆详情</div></a>#}
+        {#</header>#}
+        {#轮播图片#}
+        <input type="hidden" class="payment-url" value="{{ path("lx_pay_vehicle", {id:vehicle.id}) }}">
+        <input type="hidden" class="pay-check-url" value="{{ path("lx_pay_check", {tradeId:0}) }}">
+        <div class="banner-body">
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    {% for pic in vehicle.pic %}
+                        <div class="swiper-slide" style="background-color: black">
+                            <img data-src="{{ qn_url }}/image/detail/{{ pic }}?imageView2/1/w/360/h/200" class="swiper-lazy">
+                            <div class="swiper-lazy-preloader"></div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <!-- 如果需要分页器 -->
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+        <div class="vehicle-info-body">
+            <div class="vehicle-info">
+                <div class="vehicle-name">
+                    <h3>{{ vehicle.soucheModel }}</h3>
+                </div>
+                <div class="vehicle-detail color-d1 font-14">
+                    <span>行程：{{ vehicle.mileage }}万公里<span class="detail-cut">|</span>车龄：{{ vehicle.age }}年</span>
+                </div>
+                <div class="vehicle-price">
+                    <span class="vehicle-price-strong">{{ vehicle.info[0]['val'] }}万</span><span
+                            class="color-d1 font-14">(含过户费)</span>
+                </div>
+                {#<div class="vehicle-new color-d1 font-14">#}
+                {#<span>新车价：13.69万+1.17万购置税</span>#}
+                {#</div>#}
+            </div>
+        </div>
+        <div class="vehicle-tag-body">
+            <div class="vehicle-tag">
+                <div class="tag">
+                    {% if not vehicle.frontPaidTrade is empty %}
+                        <button class="tag-btn tag-active tag-p">订</button>
+                    {% endif %}
+                    {% if not vehicle.firstPaidTrade is empty %}
+                        <button class="tag-btn tag-active tag-p">首</button>
+                    {% endif %}
+                    {% if dealer is not empty %}
+                        <button class="tag-btn tag-p">抵押</button>
+                    {% endif %}
+                        <div class="detail_share wx_group" onclick="wxShare(true)"></div>
+                        <div class="detail_share wx_friend" onclick="wxShare(false)"></div>
+                </div>
+                {#<button class="tag-btn tag-active">抵押</button>#}
+                <div class="vehicle-store-name">
+                    <span class="color-d1">经销商：{{ vehicle.dealer.mart.name }}-{{ vehicle.dealer.name }}</span>
+                </div>
+            </div>
+        </div>
+        <div class="vehicle-assess common_deposit" data-collapse>
+            <h2>
+                <span>评估详情</span>
+                <img src="{{ asset("app/img/arrow-right.png") }}" class="common_arrow_img" alt="">
+            </h2>
+            <div class="vehicle-assess-info font-14">
+                <div class="detail-info">
+                    <div class="assess-quoted">
+                        <span class="color-d2">评估报价</span>
+                        <span class="font-right">暂无</span>
+                    </div>
+                    <div class="access-prepare">
+                        <span class="color-d2">预计整备费用</span>
+                        <span class="font-right">暂无</span>
+                    </div>
+                </div>
+                <div class="car-owner-body">
+                    <div class="vehicle-owner-info font-14">
+                        <div class="car-info color-d2">
+                            车主信息
+                        </div>
+                        <div class="car-info-detail">
+                            暂无
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% if dealer is not empty %}
+            <div class="pay-way">
+                <ul>
+                    {#预付订金#}
+                    <li>
+                        <div class="common_deposit" data-collapse>
+                            {% if not vehicle.frontPaidTrade is empty %}
+                                <h2>
+                                    已付订金:<span class="title-right">{{ vehicle.frontPaidTrade.totalFee * 1000 }}元</span>
+                                </h2>
+                                <div class="order-body">
+                                    <div class="order-content">
+                                        <p>对方账户：<span class="title-right">{{ vehicle.dealer.mart.name }}
+                                                -{{ vehicle.dealer.name }}</span></p>
+                                        <p>创建时间：<span
+                                                    class="title-right">{{ vehicle.frontPaidTrade.paidAt.date|date("Y-d-m H:i:s") }}</span>
+                                        </p>
+                                        <p>订单号：<span class="title-right">{{ vehicle.frontPaidTrade.tradeNo }}</span></p>
+                                    </div>
+                                </div>
+                            {% else %}
+                                {% set type,payWay='front','预付订金' %}
+                                {% include 'app/detail/vehicle_detail_pay.html.twig' %}
+                            {% endif %}
+                        </div>
+                    </li>
+                    {#预付订金结束#}
+                    {#预付首款#}
+                    <li>
+                        <div class="common_deposit" data-collapse>
+                            {% if not vehicle.firstPaidTrade is empty %}
+                                <h2>
+                                    已付首付:<span class="title-right">{{ vehicle.firstPaidTrade.totalFee * 1000 }}元</span>
+                                </h2>
+                                <div class="order-body">
+                                    <div class="order-content">
+                                        <p>对方账户：<span class="title-right">{{ vehicle.dealer.mart.name }}
+                                                -{{ vehicle.dealer.name }}</span></p>
+                                        <p>创建时间：<span
+                                                    class="title-right">{{ vehicle.firstPaidTrade.paidAt.date|date("Y-d-m H:i:s") }}</span>
+                                        </p>
+                                        <p>订单号：<span class="title-right">{{ vehicle.firstPaidTrade.tradeNo }}</span></p>
+                                    </div>
+                                </div>
+                            {% else %}
+                                {% set type,payWay='first','预付首付' %}
+                                {% include 'app/detail/vehicle_detail_pay.html.twig' %}
+                            {% endif %}
+                        </div>
+                    </li>
+                    {#预付首款结束#}
+                    {#全款#}
+                    <li>
+                        <div class="deposit" data-collapse>
+                            {% if not vehicle.finalPaidTrade is empty %}
+                                <h2>
+                                    已付全款:<span class="title-right">{{ vehicle.finalPaidTrade.totalFee * 1000 }}元</span>
+                                </h2>
+                                <div class="order-body">
+                                    <div class="order-content">
+                                        <p>对方账户：<span class="title-right">{{ vehicle.dealer.mart.name }}
+                                                -{{ vehicle.dealer.name }}</span></p>
+                                        <p>创建时间：<span
+                                                    class="title-right">{{ vehicle.finalPaidTrade.paidAt.date|date("Y-d-m H:i:s") }}</span>
+                                        </p>
+                                        <p>订单号：<span class="title-right">{{ vehicle.finalPaidTrade.tradeNo }}</span></p>
+                                    </div>
+                                </div>
+                            {% else %}
+                                {% set type,payWay='final','全款购买' %}
+                                {% include 'app/detail/vehicle_detail_pay.html.twig' %}
+                            {% endif %}
+                        </div>
+                    </li>
+                    {#全款结束#}
+                </ul>
+
+            </div>
+
+        {% endif %}
+    </div>
+    {% include 'app/detail/vehicle_detail_float.twig' %}
+</div>
+<script src="{{ asset("app/js/vue.min.js") }}"></script>
+<script src="{{ asset("app/js/vehicle_detail.js") }}?v=9"></script>
+<script src="{{ asset("app/js/jquery-1.9.1.js") }}"></script>
+<script src="{{ asset("app/js/swiper.jquery.min.js") }}"></script>
+<script src="{{ asset("app/js/jquery.collapse.js") }}"></script>
+<script src="{{ asset("app/js/swiper.min.js") }}"></script>
+<script src="{{ asset("app/js/main.js") }}?v=15"></script>
+<script src="{{ asset("app/js/app.js") }}?v=15"></script>
+<script>
+    //    Pace.on("done",function () {
+    //        document.querySelector('.content').style.visibility='visible';
+    //    });
+    function wxShare(type)
+    {
+        var url = window.location.href;
+        var thumbUrl = '{{ qn_url }}/image/list/{{ vehicle.cover }}';
+        var title = '{{ vehicle.soucheModel }}';
+        var text = '{{ vehicle.dealer.mart.name }}-{{ vehicle.dealer.name }}为你分享了{{ vehicle.soucheModel }}';
+        if (navigator.userAgent.match(/iPhone|iPod|iPad/i)) {
+            window.location = (type ? 'ioswxtimeline' : 'ioswxsessions')  + "://link/" + encodeURIComponent(url) + '/thumb/' + encodeURIComponent(thumbUrl) + '/title/' + encodeURIComponent(title) + '/subtitle/' + encodeURIComponent(text);
+        } else {
+            android.wxshare(url, thumbUrl, title, text, type);
+        }
+    }
+    var mySwiper = new Swiper('.swiper-container', {
+        loop: true,
+        // 如果需要分页器
+        pagination: '.swiper-pagination',
+        direction : 'horizontal',
+        lazyLoading : true,
+        lazyLoadingInPrevNext : true,
+        iOSEdgeSwipeDetection : true,
+        iOSEdgeSwipeThreshold : 50,
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+{% block user_block %}
+    <li class="">
+        <a href="{% if app.user.id is defined and is_granted('ROLE_SUPER_ADMIN') %}{{ path('admin_lexing_user_user_edit', {'id':app.user.id}) }}{% else %}#{% endif %}" style="line-height: 36px;"><i class="fa fa-user-circle"></i> 当前登入为 <strong>{{ app.user }}</strong></a>
+    </li>
+    <li class="">
+        <a href="{{ path('admin_logout') }}" style="line-height: 36px;"><i class="fa fa-sign-out"></i> 登出</a>
+    </li>
+{% endblock %}

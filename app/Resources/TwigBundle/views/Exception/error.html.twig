@@ -1,0 +1,27 @@
+{% extends "::endbase.html.twig" %}
+
+{% block stylesheets %}
+    <style>
+        .box { width: 300px; margin: 80px auto; text-align: center; border: 1px solid #ccc; padding: 28px 10px;
+            background: #eee;
+            border-radius: 4px;
+        }
+        .box .fa { font-size: 64px; }
+        h1 { font-size: 28px; }
+        .box p { font-size: 18px; margin-bottom: 20px; }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <div class="box" style="">
+        <h1>{{ status_code }}</h1>
+        {% if status_code == 404 %}
+            <p>您要看的页面不存在</p>
+        {% elseif status_code == 401 or status_code == 403  %}
+            <p>您没有登录或者没有相应权限</p>
+        {% else %}
+            <p>网站可能正在更新</p>
+        {% endif %}
+        <a style="border-bottom: 1px solid mediumblue; padding-bottom: 3px; color: mediumblue;" href="{{ site.url }}">前往首页</a>
+    </div>
+{% endblock %}

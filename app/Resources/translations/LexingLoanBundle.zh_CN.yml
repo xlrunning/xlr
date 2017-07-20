@@ -1,0 +1,26 @@
+
+Amount: 借款金额
+Amount In10 K: 借款（万元）
+Repaid Amount: 还款金额
+Repayment Trans No: 还款流水号
+Loan Remark Identifier: 借款备注ID
+Created At: 借款时间
+Repaid At: 还款时间
+Vehicle Dealer: 车商
+Vehicle: 借款车辆
+
+Vehicle Mortgage List: 车辆借贷历史
+
+Fixed: 定期
+Period By Month: 还款期（月）
+Non Fixed Starting Days: 活期起贷天数（日）
+Interest Percentage By Year: 年利率(%)
+
+Loan Product: 贷款产品
+Loan Product List: 贷款产品
+Loan Product Create: 添加贷款产品
+Vehicle Mortgage History List: 车辆借贷历史
+Vehicle Mortgage Create: 添加车辆借款
+Vehicle To Mortgage Create: 车辆借款
+Vehicle To Mortgage List: 车辆列表
+Vehicle To Repay List: 待还款车辆列表

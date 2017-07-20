@@ -1,0 +1,10 @@
+services:
+#    nnv_notification.example:
+#        class: Nnv\NotificationBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]
+    nnv_notificaiton.sms_provider_manager:
+        class: Nnv\NotificationBundle\Provider\SmsProviderManager
+    nnv_notification.sms_provider.alidayu:
+        class: Nnv\NotificationBundle\Provider\Sms\AlidayuSmsProvider
+        tags:
+            - { name: notification.sms, provider: alidayu }

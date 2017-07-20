@@ -1,0 +1,13 @@
+services:
+#    nnv_taxonomy.example:
+#        class: Nnv\TaxonomyBundle\Example
+#        arguments: ["@service_id", "plain_value", "%parameter%"]
+    nnv_taxonomy.admin.taxon:
+        class: Nnv\TaxonomyBundle\Admin\TaxonAdmin
+        arguments: [~, Nnv\TaxonomyBundle\Entity\Taxon, SonataAdminBundle:CRUD]
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: 其他, label: 分类 }
+    nnv_taxonomy.form.type.taxon_with_root:
+        class: Nnv\TaxonomyBundle\Form\Type\TaxonWithRootType
+        tags:
+            - { name: form.type, alias: taxon_with_root }

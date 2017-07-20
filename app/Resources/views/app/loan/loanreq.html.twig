@@ -1,0 +1,190 @@
+{% extends 'app/appbase.html.twig' %}
+
+{% block title %}
+    贷款申请
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset("app/css/loanreq.css") }}?v=2">
+{% endblock %}
+
+{% block body %}
+    <div class="page">
+        <div class="loan_header">
+            <div class="loan_dealer_name">
+                <span class="loan_left_title">
+                    {{  dealer.name }}
+                </span>
+            </div>
+            <div class="loan_dealer_limit">
+                <div class="loan_dealer_title">
+                    可用授信额度(元)
+                </div>
+                <div class="loan_dealer_money">
+                    {#通过审批#}
+                    {% if credit is not null and credit.dealer.creditExtension is not null %}
+                        {{ (credit.dealer.creditExtension.quota - credit.dealer.creditExtension.usedAmount) | number_format(2, '.', ',') }}
+                        {#其他#}
+                    {% else %}
+                        0.00
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <div class="loan_req">
+            <div class="loan_limit flex-1 loan_dealer_border">
+                <div class="loan_req_title">
+                    授信总额(元)
+                </div>
+                <div class="span_strong">
+                    {#通过审批#}
+                    {% if credit is not null and credit.dealer.creditExtension is not null %}
+                        {{ credit.dealer.creditExtension.quota |number_format(2, '.', ',') }}
+                        {#其他#}
+                    {% else %}
+                        0.00
+                    {% endif %}
+                </div>
+            </div>
+            <div class="loan_limit_used flex-1">
+                <div class="loan_req_title">
+                    已用额度(元)
+                </div>
+                <div class="span_strong">
+                    {#通过审批#}
+                    {% if credit is not null and credit.dealer.creditExtension is not null %}
+                        {{ credit.dealer.creditExtension.usedAmount |number_format(2, '.', ',') }}
+                        {#其他#}
+                    {% else %}
+                        0.00
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+
+        {#通过审批#}
+        {% if credit is not null and credit.state == 'approved' %}
+            <div data-collapse class="common_deposit margin-t-10">
+                <h2 class="open">
+                    <span>申请成功</span>
+                    <img src="/app/img/arrow-right.png" alt="" class="common_arrow_img">
+                </h2>
+                <ul>
+                    <li class="loan_req_reject">
+                        申请成功:{{ credit.updatedAt.date | date }}
+                    </li>
+                    <li class="loan_req_contact">
+                        <a href="tel:5888888" class="support_contact_num flex-1 ">
+                            <i class="support_contact_tel support_contact_left_logo"></i>
+                            <span>{{ tel }}</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="loan_req_flow">
+                <a href="tel:{{ tel }}" class="loan_req_flow_btn">提高额度</a>
+            </div>
+        {#正在审批#}
+        {% elseif credit is not null and credit.state == 'underway' %}
+            {% if credit.steps is not empty %}
+                <div class="loan_flow">
+                    <div data-collapse class="common_deposit">
+                        <h2 class="open">
+                            贷款进度
+                            <img src="/app/img/arrow-right.png" alt="" class="common_arrow_img">
+                        </h2>
+                        <ul>
+                            {#<li>#}
+                            {#<i class="loan_flow_status"></i>#}
+                            {#<span>申请贷款 2017年4月17日 15:30:18</span>#}
+                            {#</li>#}
+                            {#<li>#}
+                            {#<i class="loan_flow_status loan_flow_status_choose"></i>#}
+                            {#<span class="span_strong">审核资料 2017年4月17日 17:30:58</span>#}
+                            {#</li>#}
+                            {% for key,step in credit.steps %}
+                                {% set arrLen = (credit.steps | length) %}
+                                <li>
+                                    {% if key == arrLen %}
+                                        <i class="loan_flow_status loan_flow_status_choose"></i>
+                                        <span class="span_strong">{{ step['key'] }} {{ step['val'] }}</span>                      {% else %}
+                                        <i class="loan_flow_status"></i>
+                                        <span>{{ step['key'] }} {{ step['val'] }}</span>
+                                    {% endif %}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="loan_req_flow">
+                        <a href="tel:{{ tel }}" class="loan_req_flow_btn">咨询进度</a>
+                    </div>
+                </div>
+                {% else %}
+                    <div class="loan_flow">
+                        <div data-collapse class="common_deposit">
+                            <h2 class="open">
+                                贷款进度
+                                <img src="/app/img/arrow-right.png" alt="" class="common_arrow_img">
+                            </h2>
+                            <ul>
+                                <li>
+                                <i class="loan_flow_status loan_flow_status_choose"></i>
+                                <span class="span_strong">正在开始申请 {{ credit.createdAt.date | date() }}</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="loan_req_flow">
+                            <a href="tel:{{ tel }}" class="loan_req_flow_btn">咨询进度</a>
+                        </div>
+                    </div>
+            {% endif %}
+        {#被拒绝#}
+        {% elseif credit is not null and credit.state == 'rejected' %}
+            <div data-collapse class="common_deposit margin-t-10">
+                <h2 class="open">
+                    <span class="class_warn">申请被拒</span>
+                    <img src="/app/img/arrow-right.png" alt="" class="common_arrow_img">
+                </h2>
+                <ul>
+                    <li class="loan_req_reject class_warn">
+                        拒绝原因：资料未通过审核，请联系客服！
+                    </li>
+                    <li class="loan_req_contact">
+                        <a href="tel:5888888" class="support_contact_num flex-1 ">
+                            <i class="support_contact_tel support_contact_left_logo"></i>
+                            <span>{{ tel }}</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="loan_req_flow">
+                <a href="tel:{{ tel }}" class="loan_req_flow_btn">重新申请</a>
+            </div>
+            {% else %}
+            <div data-collapse class="common_deposit margin-t-10">
+                <h2 class="open">
+                    <span>申请贷款</span>
+                    <img src="/app/img/arrow-right.png" alt="" class="common_arrow_img">
+                </h2>
+                <ul>
+                    <li class="loan_req_contact">
+                        <a href="tel:5888888" class="support_contact_num flex-1 ">
+                            <i class="support_contact_tel support_contact_left_logo"></i>
+                            <span>{{ tel }}</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="loan_req_flow">
+                <a href="tel:{{ tel }}" class="loan_req_flow_btn">申请贷款</a>
+            </div>
+        {% endif %}
+
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset("app/js/jquery.collapse.js") }}"></script>
+{% endblock %}

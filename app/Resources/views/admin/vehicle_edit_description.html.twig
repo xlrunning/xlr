@@ -1,0 +1,105 @@
+<style>
+    .gallery-preview img { height: 80px; margin-right: 10px; }
+</style>
+<script src="{{ asset('js/blazy.min.js') }}"></script>
+{% if not isContractSet %}
+    <div class="alert" style="background-color: #d2d6de;">
+        <a target="_blank" class="link-gallery-manage" style="text-decoration: none;" href="{% if vehicle.id %}{{ path('lx_vehicle_gallery', {id:vehicle.id, code:'vehicle.content'}) }}{% else %}{{ path('lx_vehicle_gallery_standalone', {code:'vehicle.content'}) }}{% endif %}">
+            <h4><i class="glyphicon glyphicon-picture"></i> 照片管理【点击前往编辑】</h4>
+        </a>
+        {% if vehicle.id %}{% set gallery = vehicle.galleries['vehicle.content'] is defined ? vehicle.galleries['vehicle.content'] : null %}{% endif %}
+        {% if not vehicle.id %}{% set gallery = gallery_notattached('vehicle.content') %}{% endif %}
+        {% if gallery %}
+            <input type="hidden" name="gallery" value="{{ gallery.id }}"/>
+            <div class="gallery-preview">
+                {% for item in gallery.items %}
+                    <img class="b-lazy" title="{{ item.metaContent }}" data-src="{{ asset('uploads/gallery/' ~ item.pic) }}" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" />
+                {% endfor %}
+                {#
+                <a href="#" style="font-size: 60px; height: 80px; line-height: 80px; display: block; float: left; color: #777;">
+                    <i class="fa fa-upload" aria-hidden="true"></i>
+                </a>
+                #}
+            </div>
+        {% endif %}
+    </div>
+{% endif %}
+<script>
+    $(function(){
+        new Blazy();
+        $('.link-gallery-manage').click(function(){
+            if($(this).find('span.notice').length == 0)
+                $(this).find('h4').append('<br/><span class="notice text-red" style="font-style:italic;">如已添加或删除照片请刷新本页面查看最新照片</span>');
+        });
+    });
+</script>
+
+{% if vehicle.id %}
+    <div class="alert alert-{% if vehicle.onSale %}info{% else %}danger{% endif %}">
+        <h4>车辆信息{% if not vehicle.onSale %}【已下架】{% endif %}</h4>
+        <ul>
+            <li>车商：<strong>{{ vehicle.dealer }}</strong></li>
+            <li>车型：<strong>{{ vehicle.model }}</strong></li>
+            <li>行驶里程：<strong>{{ vehicle.mileage }}</strong></li>
+            {% if vehicle.vin %}<li>车架号：<strong>{{ vehicle.vin }}</strong></li>{% endif %}
+            {% if vehicle.plateNo %}<li>车牌：<strong>{{ vehicle.plateLoc }}-{{ vehicle.plateNo }}</strong></li>{% endif %}
+            <li>上架时间：<strong>{{ vehicle.createdAt|date }}</strong></li>
+        </ul>
+    </div>
+
+    {% if vehicle.mortgage %}
+    <div class="alert alert-success">
+        {% set mortgage = vehicle.mortgage %}
+        <h4>借款信息（备注ID：{{ mortgage.loanRemarkIdentifier }}）</h4>
+        <ul>
+            <li>借款（万元）：<strong>{{ mortgage.amountIn10K}}</strong></li>
+            <li>借款时间：<strong>{{ mortgage.createdAt|date }}</strong></li>
+        </ul>
+    </div>
+    {% endif %}
+
+    {% if isContractSet %}
+        <div class="alert" style="background-color: #d2d6de;">
+            <a target="_blank" class="link-gallery-manage" style="text-decoration: none;" href="{{ path('lx_vehicle_mortgagecontract_gallery', {id:vehicle.id, code:'mortgage.contract'}) }}">
+                <h4><i class="glyphicon glyphicon-picture"></i> 抵押合同管理【点击前往编辑】</h4>
+            </a>
+            {% if vehicle.id %}{% set gallery = vehicle.galleries['mortgage.contract'] is defined ? vehicle.galleries['mortgage.contract'] : null %}{% endif %}
+            {% if gallery %}
+                <input type="hidden" name="gallery" value="{{ gallery.id }}"/>
+                <div class="gallery-preview">
+                    {% for item in gallery.items %}
+                        <img class="b-lazy" title="{{ item.metaContent }}" data-src="{{ asset('uploads/gallery/' ~ item.pic) }}" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" />
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+        <div class="alert" style="background-color: #d2d6de;">
+            <a target="_blank" class="link-gallery-manage" style="text-decoration: none;" href="{{ path('lx_vehicle_leasecontract_gallery', {id:vehicle.id, code:'lease.contract'}) }}">
+                <h4><i class="glyphicon glyphicon-picture"></i> 租赁合同管理【点击前往编辑】</h4>
+            </a>
+            {% if vehicle.id %}{% set gallery = vehicle.galleries['lease.contract'] is defined ? vehicle.galleries['lease.contract'] : null %}{% endif %}
+            {% if gallery %}
+                <input type="hidden" name="gallery" value="{{ gallery.id }}"/>
+                <div class="gallery-preview">
+                    {% for item in gallery.items %}
+                        <img class="b-lazy" title="{{ item.metaContent }}" data-src="{{ asset('uploads/gallery/' ~ item.pic) }}" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" />
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+        <div class="alert" style="background-color: #d2d6de;">
+            <a target="_blank" class="link-gallery-manage" style="text-decoration: none;" href="{{ path('lx_vehicle_salescontract_gallery', {id:vehicle.id, code:'sales.contract', vehicle:vehicle.id}) }}">
+                <h4><i class="glyphicon glyphicon-picture"></i> 买卖合同管理【点击前往编辑】</h4>
+            </a>
+            {% if vehicle.id %}{% set gallery = vehicle.galleries['sales.contract'] is defined ? vehicle.galleries['sales.contract'] : null %}{% endif %}
+            {% if gallery %}
+                <input type="hidden" name="gallery" value="{{ gallery.id }}"/>
+                <div class="gallery-preview">
+                    {% for item in gallery.items %}
+                        <img class="b-lazy" title="{{ item.metaContent }}" data-src="{{ asset('uploads/gallery/' ~ item.pic) }}" src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" />
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+    {% endif %}
+{% endif %}

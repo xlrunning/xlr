@@ -1,0 +1,134 @@
+{% extends "app/appbase.html.twig" %}
+
+{% block title %}
+    首页
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset("app/css/swiper.min.css") }}">
+    <link rel="stylesheet" href="{{ asset("app/css/index.css") }}">
+{% endblock %}
+
+{% block body %}
+    <div class="page">
+        <div class="banner-body">
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <img src="{{ asset('app/img/index/banner-1.png') }}" class="swiper_slide_img">
+                        </div>
+                    <div class="swiper-slide">
+                        <img src="{{ asset('app/img/index/banner-3.png') }}" class="swiper_slide_img">
+                    </div>
+                </div>
+                <!-- 如果需要分页器 -->
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+        <div class="index_menu">
+            <div class="index_menu_row">
+                <a class="index_menu_item" href="{{ path("lx_dealer_app_dealer_vehicles", {'sale': 'on'}) }}">
+                    <img src="{{ asset('app/img/index/sale-p.png') }}" alt="" class="index_menu_item_img">
+                    <div class="menu_title">
+                        在售
+                    </div>
+                </a>
+                <a class="index_menu_item" href="{{ path("lx_dealer_app_dealer_vehicles", {'sale': 'out'}) }}">
+                    <img src="{{ asset('app/img/index/sale-1.png') }}" alt="" class="index_menu_item_img">
+                    <div class="menu_title">
+                        售出
+                    </div>
+                </a>
+                <a class="index_menu_item" href="{{ path("lx_dealer_app_dealer_vehicles", {'sale': 'process'}) }}">
+                    <img src="{{ asset('app/img/index/sale-in-1.png') }}" alt="" class="index_menu_item_img">
+                    <div class="menu_title">
+                        售中
+                    </div>
+                </a>
+            </div>
+            <div class="index_menu_row">
+                <a class="index_menu_item" href="#">
+                    <img src="{{ asset('app/img/index/credit.png') }}" alt="" class="index_menu_item_img">
+                    <div class="menu_title">
+                        授信
+                    </div>
+                </a>
+                <a class="index_menu_item" href="{{ path("lx_dealer_app_dealer_loanreq") }}">
+                    <img src="{{ asset('app/img/index/loan.png') }}" alt="" class="index_menu_item_img">
+                    <div class="menu_title">
+                        贷款
+                    </div>
+                </a>
+                <a class="index_menu_item" href="{{ path("lx_dealer_app_dealer_support") }}">
+                    <img src="{{ asset('app/img/index/help.png') }}" alt="" class="index_menu_item_img">
+                    <div class="menu_title">
+                        帮助
+                    </div>
+                </a>
+            </div>
+            <div class="index_menu_row">
+                <a class="index_menu_item_f" href="{{ path("lx_dealer_app_dealer_add_vehicle") }}">
+                    <img src="{{ asset('app/img/index/add-car.png') }}" alt="" class="index_menu_item_img">
+                    <div class="menu_title">
+                        添加车辆
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="index_feed_b">
+            <div class="index_edit_car">
+                <div class="index_edit_car_header">
+                    <div class="index_edit_car_header_t">
+                        <img src="{{ asset('app/img/index/car-1.png') }}" alt="" class="index_edit_car_header_img index_edit_car_header_img_f">
+                        <div class="index_edit_car_header_title">
+                            <div class="index_edit_car_header_s">{{ dealer.name }}</div>
+                            <div class="index_edit_car_header_s">09:28</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="index_edit_car_title">
+                    您还有 <span>1</span> 辆车待上架
+                </div>
+                <div class="index_edit_car_btn">
+                    立即上架
+                </div>
+            </div>
+        </div>
+
+        <div class="index_feed_b">
+            <div class="index_edit_car">
+                <div class="index_edit_car_header">
+                    <div class="index_edit_car_header_t">
+                        <img src="{{ asset('app/img/index/loan-avatar.png') }}" alt="" class="index_edit_car_header_img index_edit_car_header_img_f">
+                        <div class="index_edit_car_header_title">
+                            <div class="index_edit_car_header_s">{{ dealer.name }}</div>
+                            <div class="index_edit_car_header_s">09:21</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="index_edit_car_title">
+                    您的贷款申请已经通过
+                </div>
+                <div class="index_edit_car_btn">
+                    查看详情
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset("app/js/swiper.jquery.min.js") }}"></script>
+    <script>
+        var mySwiper = new Swiper('.swiper-container', {
+            loop: true,
+            // 如果需要分页器
+            pagination: '.swiper-pagination',
+            direction : 'horizontal',
+            lazyLoading : true,
+            lazyLoadingInPrevNext : true,
+            iOSEdgeSwipeDetection : true,
+            iOSEdgeSwipeThreshold : 50,
+        });
+    </script>
+{% endblock %}

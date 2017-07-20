@@ -1,0 +1,13 @@
+{% if isCredit %}
+    <div class="alert alert-info">
+        <h4>车商信息</h4>
+        <ul>
+            <li>客户名称：<strong>{{ dealer.name }}</strong></li>
+            <li>客户简称：<strong>{{ dealer.shortName }}</strong></li>
+            <li>归属车城：<strong>{{ dealer.mart }}</strong></li>
+            {% if dealer.creditExtensionAmount > 0 %}
+                <li>已授信金额：<strong>{{ dealer.creditExtensionAmountIn10K }}万元</strong></li>
+            {% endif %}
+        </ul>
+    </div>
+{% endif %}

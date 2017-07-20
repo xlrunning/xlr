@@ -1,0 +1,105 @@
+{% extends "app/appbase.html.twig" %}
+{% block title %}
+    我的账户
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset("app/css/my.css") }}?v=1">
+    {#<script data-pace-options='{ "document": true }' src="{{ asset('app/js/pace.min.js') }}"></script>#}
+    {#<link rel="stylesheet" href="{{ asset("app/css/pace-theme.css") }}?v=1">#}
+{% endblock %}
+
+{% block body %}
+    <div class="page">
+        <div class="header">
+            <div class="header-avatar">
+                <img class="header-avatar-img" src="{{ asset("app/img/my-avatar.png") }}" alt="">
+            </div>
+            <div class="my-name">
+                <div class="dealer-name">
+                    <p>{{ dealer.name }}</p>
+                </div>
+                <div class="mart-name">
+                    <p>{{ dealer.mart.addr }} - {{ dealer.mart.name }}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="my-car">
+            <div class="my-car-inventory flex-1">
+                库存车辆 <span class="span-strong">{{ nbOnSale }}</span> 辆
+            </div>
+            <div class="my-car-loan flex-1">
+                抵押车辆 <span class="span-strong">0</span> 辆
+            </div>
+        </div>
+
+        <div class="my-apply-body">
+            <ul>
+                {% if credit is not null %}
+                <li>
+                    <span class="my-apply-body-return-loan my-apply-body-img"></span><span class="my-apply-body-span">立即还贷</span>
+                        <span class="my-apply-arrow-right"></span>
+                </li>
+                {% endif %}
+                <li>
+                    {% if credit is not null %}
+                        <span class="my-apply-body-car-loan my-apply-body-img"></span><span class="my-apply-body-span">申请提额</span>
+                        <span class="my-apply-arrow-right"></span>
+                        {% else %}
+                            <span class="my-apply-body-car-loan my-apply-body-img"></span><span class="my-apply-body-span">申请贷款</span>
+                            <span class="my-apply-arrow-right"></span>
+                    {% endif %}
+
+                </li>
+                <li class="sync-car">
+                    <span class="my-apply-body-car-sync my-apply-body-img"></span><span class="my-apply-body-span">同步数据</span>
+                    <span class="my-apply-arrow-right"></span>
+                </li>
+                <li class="sync-car">
+                    <span class="my-apply-body-car-wx my-apply-body-img"></span><span class="my-apply-body-span">绑定微信</span>
+                    <span class="my-apply-arrow-right"></span>
+                </li>
+            </ul>
+        </div>
+
+        {% if credit is not null %}
+            <div class="info">
+                <div class="credit">
+                    <div class="credit-title flex-1">
+                        授信总额度
+                    </div>
+                    <div class="credit-num flex-1 ">
+                        <span class="color_warn">{{ credit.dealer.creditExtension.quota |number_format(2, '.', ',')}}</span>元
+                    </div>
+                </div>
+                <div class="my-chart">
+                    <div id="main" style="width: 100%;height:200px;"></div>
+                </div>
+            </div>
+        {% endif %}
+
+
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {#<script src="{{ asset('app/js/loadjs.min.js') }}"></script>#}
+    <script src="{{ asset('app/js/echarts.min.js') }}"></script>
+    {% if credit is not null %}
+    <script src="{{ asset('app/js/myChart.js') }}"></script>
+        {% endif %}
+    <script>
+        //进度条
+        //        Pace.on("done",function () {
+        //        document.querySelector('.page').style.visibility='visible';
+        //        });
+        //异步加载js
+        {#window.addEventListener('load', function (ev) {#}
+            {#loadjs(["{{ asset('app/js/myChart.js') }}"], function () {#}
+                {#console.log('myChart.js loaded');#}
+            {#});#}
+        {#});#}
+
+    </script>
+{% endblock %}
